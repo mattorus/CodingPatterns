@@ -6,7 +6,8 @@ namespace CodingPatterns
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("----------------------EXECUTING TESTS----------------------");
+            Pattern_DepthFirstSearch.RunTests();
         }
     }
 }

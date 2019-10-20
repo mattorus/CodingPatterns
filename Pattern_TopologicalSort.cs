@@ -42,7 +42,7 @@ namespace CodingPatterns
             // - Find source nodes
             // - Queue up source nodes
 
-            return sortedGraph;
+            return null;
         }
 
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CodingPatterns
 {
@@ -9,14 +8,9 @@ namespace CodingPatterns
 
         public Pattern_DepthFirstSearch() { }
 
-        // TreeDFS
-        public static int PathsForSumIter(TreeNode root, int sum)
-        {
-            return PathsForSumIter(new Stack<TreeNode>(), root, sum);
-        }
-
         public static void RunTests()
         {
+
             Console.WriteLine("PathsForSumIter");
             Console.WriteLine("--------------------------");
             TreeNode root = new TreeNode(12);
@@ -30,19 +24,52 @@ namespace CodingPatterns
             Console.WriteLine($"Checking root {root.Val} for path sum: {sum}");
             Console.WriteLine("------------------------------------------");
             int numPaths = PathsForSumIter(root, sum);
-            Console.WriteLine($"Tree has {numPaths} pat{(numPaths != 1 ? "hs" : "h")}");
+            Console.WriteLine($"numPaths: {numPaths}");
             sum = 18;
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Checking root {root.Val} for path sum: {sum}");
             Console.WriteLine("------------------------------------------");
             numPaths = PathsForSumIter(root, sum);
-            Console.WriteLine($"Tree has {numPaths} pat{(numPaths != 1 ? "hs" : "h")}");
+            Console.WriteLine($"numPaths: {numPaths}");
             sum = 23;
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Checking root {root.Val} for path sum: {sum}");
             Console.WriteLine("------------------------------------------");
             numPaths = PathsForSumIter(root, sum);
-            Console.WriteLine($"Tree has {numPaths} pat{(numPaths != 1 ? "hs" : "h")}");
+            Console.WriteLine($"numPaths: {numPaths}");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("PathsForSumRec");
+            Console.WriteLine("--------------------------");
+            root = new TreeNode(12);
+            root.Left = new TreeNode(7);
+            root.Right = new TreeNode(1);
+            root.Left.Left = new TreeNode(4);
+            root.Right.Left = new TreeNode(10);
+            root.Right.Right = new TreeNode(5);
+            sum = 11;
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Checking root {root.Val} for path sum: {sum}");
+            Console.WriteLine("------------------------------------------");
+            numPaths = PathsForSumRec(root, sum);
+            Console.WriteLine($"numPaths: {numPaths}");
+            sum = 18;
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Checking root {root.Val} for path sum: {sum}");
+            Console.WriteLine("------------------------------------------");
+            numPaths = PathsForSumRec(root, sum);
+            Console.WriteLine($"numPaths: {numPaths}");
+            sum = 23;
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Checking root {root.Val} for path sum: {sum}");
+            Console.WriteLine("------------------------------------------");
+            numPaths = PathsForSumRec(root, sum);
+            Console.WriteLine($"numPaths: {numPaths}");
+        }
+
+        // TreeDFS
+        public static int PathsForSumIter(TreeNode root, int sum)
+        {
+            return PathsForSumIter(new Stack<TreeNode>(), root, sum);
         }
 
         private static int PathsForSumIter(Stack<TreeNode> treeStack, TreeNode root, int sum)
@@ -103,21 +130,27 @@ namespace CodingPatterns
             }
         }
 
-        public static int PathsForSum(TreeNode root, int sum)
+        public static int PathsForSumRec(TreeNode root, int sum)
         {
-            IList<IList<int>> paths = new List<IList<int>>();
+            int numPaths = 0, leftNumPaths = 0, rightNumPaths = 0;
 
-            // Find and return all paths, that must end at leaf nodes, whose nodes add up to sum parameter
-            // Algorithm:
-            // - Recursive helper function:
-            //   - Parameters - root, sum, curList
-            //   - Return value - ??
-            // - Start from each leaf node (recurse until left == null && right == null)
-            //   - Add node val to total and head of curList
-            //   - If total == sum, add list to paths
-            //   - Else, return/move to other path
+            if (root == null)
+            {
+                return 0;
+            }
+
             
-            return PathsForSumDFS(root, sum);
+            if(root.Val == sum)
+            {
+                numPaths++;
+            }
+
+            leftNumPaths += PathsForSumRec(root.Left, sum - root.Val) + PathsForSumRec(root.Left, sum);
+            rightNumPaths += PathsForSumRec(root.Right, sum - root.Val) + PathsForSumRec(root.Right, sum);
+
+            numPaths += leftNumPaths + rightNumPaths;
+            
+            return numPaths;
         }
 
         private static int PathsForSumDFS(TreeNode root, int sum)

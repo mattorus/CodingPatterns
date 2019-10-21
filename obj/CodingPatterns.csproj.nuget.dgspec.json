@@ -1,28 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/Users/Matt/workspace/code/interview_practice/CodingPatterns/CodingPatterns.csproj": {}
+    "C:\\Users\\matto\\source\\repos\\CodingPatterns\\CodingPatterns.csproj": {}
   },
   "projects": {
-    "/Users/Matt/workspace/code/interview_practice/CodingPatterns/CodingPatterns.csproj": {
+    "C:\\Users\\matto\\source\\repos\\CodingPatterns\\CodingPatterns.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Matt/workspace/code/interview_practice/CodingPatterns/CodingPatterns.csproj",
+        "projectUniqueName": "C:\\Users\\matto\\source\\repos\\CodingPatterns\\CodingPatterns.csproj",
         "projectName": "CodingPatterns",
-        "projectPath": "/Users/Matt/workspace/code/interview_practice/CodingPatterns/CodingPatterns.csproj",
-        "packagesPath": "/Users/Matt/.nuget/packages/",
-        "outputPath": "/Users/Matt/workspace/code/interview_practice/CodingPatterns/obj/",
+        "projectPath": "C:\\Users\\matto\\source\\repos\\CodingPatterns\\CodingPatterns.csproj",
+        "packagesPath": "C:\\Users\\matto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\matto\\source\\repos\\CodingPatterns\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "/Users/Matt/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\matto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -53,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using CodingPatterns.Sorts;
 
 namespace CodingPatterns
 {
@@ -8,6 +9,7 @@ namespace CodingPatterns
         {
             Console.WriteLine("----------------------EXECUTING TESTS----------------------");
             Pattern_DepthFirstSearch.RunTests();
+            Pattern_SelectionSort.RunTests();
         }
     }
 }

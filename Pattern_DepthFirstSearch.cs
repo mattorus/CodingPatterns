@@ -10,7 +10,8 @@ namespace CodingPatterns
 
         public static void RunTests()
         {
-
+            string testPattern = "PATTERN_DEPTHFIRSTSEARCH";
+            Helpers.PrintStartTests(testPattern);
             Console.WriteLine("PathsForSumIter");
             Console.WriteLine("--------------------------");
             TreeNode root = new TreeNode(12);
@@ -64,6 +65,8 @@ namespace CodingPatterns
             Console.WriteLine("------------------------------------------");
             numPaths = PathsForSumRec(root, sum);
             Console.WriteLine($"numPaths: {numPaths}");
+
+            Helpers.PrintEndTests(testPattern);
         }
 
         // TreeDFS

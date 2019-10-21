@@ -10,14 +10,14 @@ namespace CodingPatterns
         public static void PrintStartTests(string testPattern)
         {
             Console.WriteLine("\n     --------------------------");
-            Console.WriteLine($"-------{testPattern} START-------");
+            Console.WriteLine($"-------START {testPattern}-------");
             Console.WriteLine("     --------------------------\n");
         }
 
         public static void PrintEndTests(string testPattern)
         {
             Console.WriteLine("\n     --------------------------");
-            Console.WriteLine($"-------{testPattern} END-------");
+            Console.WriteLine($"-------END {testPattern}-------");
             Console.WriteLine("     --------------------------\n");
         }
 

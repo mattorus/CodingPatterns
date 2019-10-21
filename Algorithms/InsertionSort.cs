@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CodingPatterns;
 
 namespace CodingPatterns.Algorithms
 {
@@ -10,7 +9,7 @@ namespace CodingPatterns.Algorithms
 
         public static void RunTests()
         {
-            string testPattern = "PATTERN_INSERTIONSORT";
+            string testPattern = "INSERTIONSORT";
             Helpers.PrintStartTests(testPattern);
 
             Console.WriteLine("Insert");

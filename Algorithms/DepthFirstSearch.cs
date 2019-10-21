@@ -10,7 +10,7 @@ namespace CodingPatterns.Algorithms
 
         public static void RunTests()
         {
-            string testPattern = "PATTERN_DEPTHFIRSTSEARCH";
+            string testPattern = "DEPTHFIRSTSEARCH";
             Helpers.PrintStartTests(testPattern);
             Console.WriteLine("PathsForSumIter");
             Console.WriteLine("--------------------------");

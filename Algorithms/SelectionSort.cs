@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CodingPatterns;
 
 namespace CodingPatterns.Algorithms
 {
@@ -11,7 +10,7 @@ namespace CodingPatterns.Algorithms
 
         public static void RunTests()
         {
-            string testPattern = "PATTERN_SELECTIONSORT";
+            string testPattern = "SELECTIONSORT";
             Helpers.PrintStartTests(testPattern);
             Console.WriteLine("Testing DoSort()");
             Console.WriteLine("--------------------------");

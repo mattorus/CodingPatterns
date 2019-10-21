@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CodingPatterns
+namespace CodingPatterns.Algorithms
 {
     // Directed graph is defined by edges [vStart, vEnd], where vStart is the start vertex and vEnd is the end vertex.
     // Ex: [1, 0], [2, 1], [3, 2], [3, 1]
@@ -15,7 +15,7 @@ namespace CodingPatterns
     //   |  \|
     //   0   1
 
-    class Pattern_TopologicalSort
+    class TopologicalSort
     {
         public int NumVertices { get; set; }
         int[][] Graph { get; set; }
@@ -23,9 +23,9 @@ namespace CodingPatterns
         public IList<int> SourceVertices { get; set; }
         public IList<int> SinkVertices { get; set; }
 
-        public Pattern_TopologicalSort() { }
+        public TopologicalSort() { }
 
-        public Pattern_TopologicalSort(int[][] g, int n = 0) 
+        public TopologicalSort(int[][] g, int n = 0) 
         {
             Graph = g;
             NumVertices = n;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using CodingPatterns;
 
-namespace CodingPatterns.Sorts
+namespace CodingPatterns.Algorithms
 {
-    class Pattern_InsertionSort
+    class InsertionSort
     {
 
         public static void RunTests()

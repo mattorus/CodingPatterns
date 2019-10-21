@@ -1,5 +1,8 @@
 ﻿using System;
-using CodingPatterns.Sorts;
+using CodingPatterns.Algorithms;
+using System.Collections.Generic;
+//using System.Linq;
+
 
 namespace CodingPatterns
 {
@@ -8,9 +11,16 @@ namespace CodingPatterns
         static void Main(string[] args)
         {
             Console.WriteLine("----------------------EXECUTING TESTS----------------------");
-            Pattern_DepthFirstSearch.RunTests();
-            Pattern_SelectionSort.RunTests();
-            Pattern_InsertionSort.RunTests();
+            DepthFirstSearch.RunTests();
+            SelectionSort.RunTests();
+            InsertionSort.RunTests();
+            Console.WriteLine(9 / 2);
+            Console.WriteLine(8 / 2);
+            Console.WriteLine(Math.Ceiling(9d / 2d));
+
+            // DFS
+            Stack<TreeNode> treeStack;
+
         }
     }
 }

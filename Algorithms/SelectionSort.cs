@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using CodingPatterns;
 
-namespace CodingPatterns.Sorts
+namespace CodingPatterns.Algorithms
 {
-    class Pattern_SelectionSort
+    class SelectionSort
     {
-        public Pattern_SelectionSort() { }
+        public SelectionSort() { }
 
         public static void RunTests()
         {

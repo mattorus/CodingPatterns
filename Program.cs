@@ -1,8 +1,5 @@
 ﻿using System;
 using CodingPatterns.Algorithms;
-using System.Collections.Generic;
-//using System.Linq;
-
 
 namespace CodingPatterns
 {
@@ -18,6 +15,7 @@ namespace CodingPatterns
             Palindrome.RunTests();
             Recursion.RunTests();
             MergeSort.RunTests();
+            QuickSort.RunTests();
 
             Console.WriteLine(9 / 2);
             Console.WriteLine(8 / 2);

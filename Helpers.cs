@@ -1,10 +1,18 @@
 ﻿using System;
+
 namespace CodingPatterns
 {
     public class Helpers
     {
         public Helpers()
         {
+        }
+
+        public static void Swap(int[] arr, int i, int j)
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
 
         public static void PrintStartFunctionTest(string name)

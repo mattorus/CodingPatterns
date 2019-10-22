@@ -16,6 +16,7 @@ namespace CodingPatterns
             Recursion.RunTests();
             MergeSort.RunTests();
             QuickSort.RunTests();
+            BreadthFirstSearch.RunTests();
 
             Console.WriteLine(9 / 2);
             Console.WriteLine(8 / 2);

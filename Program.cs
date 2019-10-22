@@ -14,13 +14,15 @@ namespace CodingPatterns
             DepthFirstSearch.RunTests();
             SelectionSort.RunTests();
             InsertionSort.RunTests();
+            Factorial.RunTests();
+            Palindrome.RunTests();
+            Recursion.RunTests();
+            MergeSort.RunTests();
+
             Console.WriteLine(9 / 2);
             Console.WriteLine(8 / 2);
-            Console.WriteLine(Math.Ceiling(9d / 2d));
-
-            // DFS
-            Stack<TreeNode> treeStack;
-
+            Console.WriteLine(Math.Ceiling(1d / 2d));
+            Console.WriteLine(Math.Floor(1d / 2d));
         }
     }
 }

@@ -7,6 +7,12 @@ namespace CodingPatterns
         {
         }
 
+        public static void PrintStartFunctionTest(string name)
+        {
+            Console.WriteLine($"Testing {name}()");
+            Console.WriteLine("--------------------------");
+        }
+
         public static void PrintStartTests(string testPattern)
         {
             Console.WriteLine("\n     --------------------------");
@@ -23,11 +29,16 @@ namespace CodingPatterns
 
         public static void PrintArray(int[] nums)
         {
-            Console.Write("  [");
-            foreach (int n in nums)
+            if (nums == null)
             {
-                Console.Write(n);
-                if (n != nums[nums.Length - 1])
+                return;
+            }
+
+            Console.Write("  [");
+            for (int i = 0; i < nums.Length; i++)
+            {
+                Console.Write(nums[i]);
+                if (i != nums.Length - 1)
                 {
                     Console.Write(", ");
                 }

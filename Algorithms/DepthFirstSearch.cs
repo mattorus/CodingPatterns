@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodingPatterns
+namespace CodingPatterns.Algorithms
 {
-    class Pattern_DepthFirstSearch
+    class DepthFirstSearch
     {
 
-        public Pattern_DepthFirstSearch() { }
+        public DepthFirstSearch() { }
 
         public static void RunTests()
         {
-            string testPattern = "PATTERN_DEPTHFIRSTSEARCH";
+            string testPattern = "DEPTHFIRSTSEARCH";
             Helpers.PrintStartTests(testPattern);
             Console.WriteLine("PathsForSumIter");
             Console.WriteLine("--------------------------");

@@ -1,5 +1,5 @@
 ﻿using System;
-using CodingPatterns.Sorts;
+using CodingPatterns.Algorithms;
 
 namespace CodingPatterns
 {
@@ -8,9 +8,20 @@ namespace CodingPatterns
         static void Main(string[] args)
         {
             Console.WriteLine("----------------------EXECUTING TESTS----------------------");
-            Pattern_DepthFirstSearch.RunTests();
-            Pattern_SelectionSort.RunTests();
-            Pattern_InsertionSort.RunTests();
+            DepthFirstSearch.RunTests();
+            SelectionSort.RunTests();
+            InsertionSort.RunTests();
+            Factorial.RunTests();
+            Palindrome.RunTests();
+            Recursion.RunTests();
+            MergeSort.RunTests();
+            QuickSort.RunTests();
+            BreadthFirstSearch.RunTests();
+
+            Console.WriteLine(9 / 2);
+            Console.WriteLine(8 / 2);
+            Console.WriteLine(Math.Ceiling(1d / 2d));
+            Console.WriteLine(Math.Floor(1d / 2d));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using CodingPatterns.Algorithms;
+using CodingPatterns.Patterns;
 
 namespace CodingPatterns
 {
@@ -7,8 +8,8 @@ namespace CodingPatterns
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("----------------------EXECUTING TESTS----------------------");
-            DepthFirstSearch.RunTests();
+            Console.WriteLine("----------------------START ALGORITHM TESTS----------------------");
+            
             SelectionSort.RunTests();
             InsertionSort.RunTests();
             Factorial.RunTests();
@@ -17,6 +18,14 @@ namespace CodingPatterns
             MergeSort.RunTests();
             QuickSort.RunTests();
             BreadthFirstSearch.RunTests();
+            
+            Console.WriteLine("----------------------END ALGORITHM TESTS----------------------");
+            Console.WriteLine("----------------------START PATTERN TESTS----------------------");
+            
+            DFS.RunTests();
+            BFS.RunTests();
+
+            Console.WriteLine("----------------------END PATTERN TESTS----------------------");
 
             Console.WriteLine(9 / 2);
             Console.WriteLine(8 / 2);

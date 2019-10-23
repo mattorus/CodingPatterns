@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace CodingPatterns.Algorithms
+namespace CodingPatterns.Patterns
 {
-    class DepthFirstSearch
+    class DFS
     {
-
-        public DepthFirstSearch() { }
-
         public static void RunTests()
         {
-            string testPattern = "DEPTHFIRSTSEARCH";
+            string testPattern = "DFS";
             Helpers.PrintStartTests(testPattern);
             Console.WriteLine("PathsForSumIter");
             Console.WriteLine("--------------------------");
@@ -103,7 +101,7 @@ namespace CodingPatterns.Algorithms
                     sum -= curNode.Val;
 
                     if (treeStack.Count == 0)
-                    {   
+                    {
                         break;
                     }
                     else
@@ -122,7 +120,7 @@ namespace CodingPatterns.Algorithms
                 treeStack.Push(curNode);
                 // Need to reverse array of existing stack to make perfect copy
                 TreeNode[] tree = treeStack.ToArray();
-                Array.Reverse(tree); 
+                Array.Reverse(tree);
                 leftStack = new Stack<TreeNode>(tree);
                 rightStack = new Stack<TreeNode>(tree);
 
@@ -142,8 +140,7 @@ namespace CodingPatterns.Algorithms
                 return 0;
             }
 
-            
-            if(root.Val == sum)
+            if (root.Val == sum)
             {
                 numPaths++;
             }
@@ -152,7 +149,7 @@ namespace CodingPatterns.Algorithms
             rightNumPaths += PathsForSumRec(root.Right, sum - root.Val) + PathsForSumRec(root.Right, sum);
 
             numPaths += leftNumPaths + rightNumPaths;
-            
+
             return numPaths;
         }
 
@@ -183,7 +180,7 @@ namespace CodingPatterns.Algorithms
                         paths.Add(curList);
                     }
                 }
-                
+
             }
 
             return paths;

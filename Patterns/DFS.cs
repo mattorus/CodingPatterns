@@ -87,8 +87,54 @@ namespace CodingPatterns.Patterns
             root.Right.Left.Right.Left.Left = new TreeNode(9);
             treeInfo = TreeDiameter(root);
             Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+            root = new TreeNode(1);
+            root.Left = new TreeNode(2);
+            root.Right = new TreeNode(3);
+            root.Left.Left = new TreeNode(4);
+            root.Right.Left = new TreeNode(5);
+            root.Right.Right = new TreeNode(6);
+            Console.WriteLine($"maxPathSum: {MaxPathSum(root)}");
+            root = new TreeNode(1);
+            root.Left = new TreeNode(2);
+            root.Right = new TreeNode(3);
+            Console.WriteLine($"maxPathSum: {MaxPathSum(root)}");
+            root.Left.Left = new TreeNode(1);
+            root.Left.Right = new TreeNode(3);
+            root.Right.Left = new TreeNode(5);
+            root.Right.Right = new TreeNode(6);
+            root.Right.Left.Left = new TreeNode(7);
+            root.Right.Left.Right = new TreeNode(8);
+            root.Right.Right.Left = new TreeNode(9);
+            Console.WriteLine($"maxPathSum: {MaxPathSum(root)}");
+            root = new TreeNode(-1);
+            root.Left = new TreeNode(-3);
+            Console.WriteLine($"maxPathSum: {MaxPathSum(root)}");
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        private static int _maxPathSum = 0;
+
+        public static (int MaxPath, int MaxDepth) MaxPathSum(TreeNode root)
+        {
+            if (root == null)
+            {
+                return (0, 0);
+            }
+
+            if (root.Left == null && root.Right == null)
+            {
+                return (root.Val, 1);
+            }
+
+            var leftInfo = MaxPathSum(root.Left);
+            var rightInfo = MaxPathSum(root.Right);
+
+            int maxDepth = 1 + Math.Max(leftInfo.MaxDepth, rightInfo.MaxDepth);
+            int maxChildPath = Math.Max(leftInfo.MaxPath, rightInfo.MaxPath);
+            int maxPath = root.Val + leftInfo.MaxPath + rightInfo.MaxPath;
+            
+            return (Math.Max(maxPath, maxChildPath), maxDepth);
         }
 
         public static (int MaxPath, int MaxDepth) TreeDiameter(TreeNode root)
@@ -106,14 +152,9 @@ namespace CodingPatterns.Patterns
             var leftInfo = TreeDiameter(root.Left);
             var rightInfo = TreeDiameter(root.Right);
             
-            int maxPath = 0;
             int maxDepth = 1 + Math.Max(leftInfo.MaxDepth, rightInfo.MaxDepth);            
             int maxChildPath = Math.Max(leftInfo.MaxPath, rightInfo.MaxPath);
-
-            if (leftInfo.MaxDepth > 0 && rightInfo.MaxDepth > 0)
-            {
-                maxPath = 1 + leftInfo.MaxDepth + rightInfo.MaxDepth;
-            }
+            int maxPath = 1 + leftInfo.MaxDepth + rightInfo.MaxDepth;
 
             return (Math.Max(maxPath, maxChildPath), maxDepth);
         }

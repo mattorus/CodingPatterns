@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CodingPatterns
 {
@@ -53,6 +54,37 @@ namespace CodingPatterns
             }
 
             Console.WriteLine("]");
+        }
+
+        public static void PrintListList(IList<IList<int>> numLists)
+        {
+            Console.WriteLine("  [");
+
+            for (int i = 0; i < numLists.Count; i++)
+            {
+                Console.Write("   [");
+
+                for (int j = 0; j < numLists[i].Count; j++)
+                {
+                    Console.Write(numLists[i][j]);
+
+                    if (j < numLists[i].Count - 1)
+                    {
+                        Console.Write(", ");
+                    }
+                }
+
+                Console.Write("]");
+
+                if (i < numLists.Count - 1)
+                {
+                    Console.Write(",");
+                }
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("  ]");
         }
     }
 }

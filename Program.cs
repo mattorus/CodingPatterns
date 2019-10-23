@@ -24,6 +24,8 @@ namespace CodingPatterns
                         
             BFS.RunTests();
             DFS.RunTests();
+            SlidingWindow.RunTests();
+            TwoPointers.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
         }

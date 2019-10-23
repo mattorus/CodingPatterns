@@ -64,7 +64,58 @@ namespace CodingPatterns.Patterns
             numPaths = PathsForSumRec(root, sum);
             Console.WriteLine($"numPaths: {numPaths}");
 
+            string name = "TreeDiameter";
+            Helpers.PrintStartFunctionTest(name);
+            var treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+            root = new TreeNode(1);
+            root.Left = new TreeNode(2);
+            root.Right = new TreeNode(3);
+            root.Left.Left = new TreeNode(4);
+            root.Right.Left = new TreeNode(5);
+            root.Right.Right = new TreeNode(6);
+            treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+            root.Left.Left = null;
+            root.Right.Left.Left = new TreeNode(7);
+            root.Right.Left.Right = new TreeNode(8);
+            root.Right.Right.Left = new TreeNode(9);
+            root.Right.Left.Right.Left = new TreeNode(10);
+            root.Right.Right.Left.Left = new TreeNode(11);
+            treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+            root.Right.Left.Right.Left.Left = new TreeNode(9);
+            treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static (int, int) TreeDiameter(TreeNode root)
+        {
+            if (root == null)
+            {
+                return (0, 0);
+            }
+
+            if (root.Left == null && root.Right == null)
+            {
+                return (0, 1);
+            }
+
+            var leftInfo = TreeDiameter(root.Left);
+            var rightInfo = TreeDiameter(root.Right);
+            
+            int maxPath = 0;
+            int maxDepth = 1 + Math.Max(leftInfo.Item2, rightInfo.Item2);            
+            int maxChildPath = Math.Max(leftInfo.Item1, rightInfo.Item1);
+
+            if (leftInfo.Item2 > 0 && rightInfo.Item2 > 0)
+            {
+                maxPath = 1 + leftInfo.Item2 + rightInfo.Item2;
+            }
+
+            return (Math.Max(maxPath, maxChildPath), maxDepth);
         }
 
         // TreeDFS
@@ -188,4 +239,6 @@ namespace CodingPatterns.Patterns
 
         // GraphDFS
     }
+
+
 }

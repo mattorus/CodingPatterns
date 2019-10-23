@@ -21,9 +21,9 @@ namespace CodingPatterns
             
             Console.WriteLine("----------------------END ALGORITHM TESTS----------------------");
             Console.WriteLine("----------------------START PATTERN TESTS----------------------");
-            
-            DFS.RunTests();
+                        
             BFS.RunTests();
+            DFS.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
 

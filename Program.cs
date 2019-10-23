@@ -26,11 +26,6 @@ namespace CodingPatterns
             DFS.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
-
-            Console.WriteLine(9 / 2);
-            Console.WriteLine(8 / 2);
-            Console.WriteLine(Math.Ceiling(1d / 2d));
-            Console.WriteLine(Math.Floor(1d / 2d));
         }
     }
 }

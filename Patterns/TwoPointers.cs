@@ -9,14 +9,18 @@ namespace CodingPatterns.Patterns
 
         public static void RunTests()
         {
+            int[] arr;
+            int[] pairSum;
+            int targetSum;
+            string name;
             string testPattern = "TWOPOINTERS";
             Helpers.PrintStartTests(testPattern);
 
-            string name = "PairWithSum";
+            name = "PairWithSum";
             Helpers.PrintStartFunctionTest(name);
-            int[] arr = { 1, 2, 3, 4, 6 };
-            int targetSum = 6;
-            int[] pairSum = PairWithSum(arr, targetSum);
+            arr = new[] { 1, 2, 3, 4, 6 };
+            targetSum = 6;
+            pairSum = PairWithSum(arr, targetSum);
             Helpers.PrintArray(arr);
             Console.WriteLine($"  pairSum: [{pairSum[0]}, {pairSum[1]}]");
             arr = new[] { 2, 5, 9, 11 };
@@ -77,8 +81,68 @@ namespace CodingPatterns.Patterns
             Console.WriteLine($"  targetSum: {targetSum}");
             Console.WriteLine($"    ClosestSum: {TripletTargetCloseSum(arr, targetSum)}");
 
+            name = "TripletSumLessThan";
+            Helpers.PrintStartFunctionTest(name);
+            arr = new[] { -1, 0, 2, 3 };
+            targetSum = 3;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"   Count of sum < target: {TripletSumLessThan(arr, targetSum)}");
+            arr = new[] { -1, 4, 2, 1, 3 };
+            targetSum = 5;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"   Count of sum < target: {TripletSumLessThan(arr, targetSum)}");
+            arr = new[] { -1, 0, 2, 3 };
+            targetSum = 2;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"   Count of sum < target: {TripletSumLessThan(arr, targetSum)}");
+            arr = new[] { -1, 4, 2, 1, 3 };
+            targetSum = 3;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"   Count of sum < target: {TripletSumLessThan(arr, targetSum)}");
+            arr = new[] { -1, 0, 2, 3 };
+            targetSum = 6;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"   Count of sum < target: {TripletSumLessThan(arr, targetSum)}");
+            arr = new[] { -1, 4, 2, 1, 3 };
+            targetSum = 9;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"   Count of sum < target: {TripletSumLessThan(arr, targetSum)}");
+
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static int TripletSumLessThan(int[] arr, int targetSum)
+        {
+            int sum = 0;
+
+            if (arr == null)
+            {
+                return -1;
+            }
+
+
+            Array.Sort(arr);
+
+            for (int i = 0; i < arr.Length - 2; i++)
+            {
+                int j = i + 1, k = arr.Length - 1;
+                while (j < k)
+                {
+                    //Console.WriteLine($"({i}: {arr[i]}, {j}: {arr[j]}, {k}: {arr[k]})");
+                    if (arr[j] + arr[k] < targetSum - arr[i])
+                    {
+                        sum += k - j;
+                        j++;
+                    }
+                    else 
+                    {
+                        k--;
+                    }              
+                }
+            }                       
+
+            return sum;
         }
 
         public static int TripletTargetCloseSum(int[] arr, int targetSum)

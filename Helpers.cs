@@ -18,7 +18,7 @@ namespace CodingPatterns
 
         public static void PrintStartFunctionTest(string name)
         {
-            Console.WriteLine($"Testing {name}()");
+            Console.WriteLine($"\nTesting {name}()");
             Console.WriteLine("--------------------------");
         }
 

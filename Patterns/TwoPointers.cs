@@ -45,7 +45,7 @@ namespace CodingPatterns.Patterns
 
             name = "TripletZeroSum";
             Helpers.PrintStartFunctionTest(name);
-            arr = new[] { -3, 0, 1, 2, -1, 1, -2 };            
+            arr = new[] { -3, 0, 1, 2, -1, 1, -2 };
             Array.Sort(arr);
             Helpers.PrintArray(arr);
             Helpers.PrintListList(TripletZeroSum(arr));
@@ -59,7 +59,69 @@ namespace CodingPatterns.Patterns
             Helpers.PrintListList(TripletZeroSum(arr));
             Console.WriteLine();
 
+            name = "TripletTargetCloseSum";
+            Helpers.PrintStartFunctionTest(name);
+            arr = new[] { -2, 0, 1, 2 };
+            targetSum = 2;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"  targetSum: {targetSum}");
+            Console.WriteLine($"    ClosestSum: {TripletTargetCloseSum(arr, targetSum)}");
+            arr = new[] { 2, -1, 1, -3 };
+            targetSum = 1;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"  targetSum: {targetSum}");
+            Console.WriteLine($"    ClosestSum: {TripletTargetCloseSum(arr, targetSum)}");
+            arr = new[] { 1, 0, 1, 1 };
+            targetSum = 100;
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"  targetSum: {targetSum}");
+            Console.WriteLine($"    ClosestSum: {TripletTargetCloseSum(arr, targetSum)}");
+
+
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static int TripletTargetCloseSum(int[] arr, int targetSum)
+        {
+            int minSum = Int32.MaxValue;
+
+            if (arr == null)
+            {
+                return minSum;
+            }
+
+            Array.Sort(arr);
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int j = i + 1, k = arr.Length - 1, target = targetSum - arr[i];
+
+                while (j < k)
+                {
+                    int curSum = arr[i] + arr[j] + arr[k];
+                    int curDiff = Math.Abs(targetSum - curSum);
+                    
+                    if (curDiff < Math.Abs(targetSum - minSum))
+                    {
+                        minSum = curSum;
+                    }
+
+                    if (curSum > targetSum)
+                    {
+                        k--;
+                    }
+                    else if (curSum < targetSum)
+                    {
+                        j++;
+                    }
+                    else
+                    {
+                        return curSum;
+                    }
+                }
+            }
+
+            return minSum;
         }
 
         public static IList<IList<int>> TripletZeroSum(int[] arr)

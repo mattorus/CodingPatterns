@@ -26,6 +26,7 @@ namespace CodingPatterns
             DFS.RunTests();
             SlidingWindow.RunTests();
             TwoPointers.RunTests();
+            FastSlowPointers.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
         }

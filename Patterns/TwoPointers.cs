@@ -108,9 +108,78 @@ namespace CodingPatterns.Patterns
             Helpers.PrintArray(arr);
             Console.WriteLine($"   Count of sum < target: {TripletSumLessThan(arr, targetSum)}");
 
+            name = "SubarraysProductLessThan";
+            Helpers.PrintStartFunctionTest(name);
+            arr = new[] { 2, 5, 3, 10 };
+            targetSum = 30;
+            IList<IList<int>> subArrays = SubarraysProductLessThan(arr, targetSum);
+            Helpers.PrintListList(subArrays);
+            arr = new[] { 8, 2, 6, 5 };
+            targetSum = 50;
+            subArrays = SubarraysProductLessThan(arr, targetSum);
+            Helpers.PrintListList(subArrays);
+            arr = new[] { 3, 5, 1, 0, 2, 6, 5 };
+            targetSum = 200;
+            subArrays = SubarraysProductLessThan(arr, targetSum);
+            Helpers.PrintListList(subArrays);
+            arr = new[] { 3, 5, 1, 4, 2, 6, 5 };
+            targetSum = 200;
+            subArrays = SubarraysProductLessThan(arr, targetSum);
+            Helpers.PrintListList(subArrays);
 
             Helpers.PrintEndTests(testPattern);
         }
+
+        public static IList<IList<int>> SubarraysProductLessThan(int[] arr, int targetSum)
+        {
+            IList<IList<int>> subArrays = new List<IList<int>>();
+            HashSet<int> added = new HashSet<int>();
+            int i = 0, j = 0, product = 0;
+
+            if (arr == null)
+            {
+                return null;
+            }
+
+            while (i < arr.Length)
+            {
+                product = arr[i];
+                if (product < targetSum)
+                {
+                    IList<int> curProduct = new List<int>();
+                    j = i;
+
+                    while (product < targetSum && i <= j && j < arr.Length)
+                    {   
+                        curProduct.Add(arr[j]);
+
+                        if (!added.Contains(j))
+                        {
+                            subArrays.Add(new List<int> { arr[j] });
+                        }
+
+                        added.Add(j);
+
+                        if (j > i) // Seems unnecessary, may be a way to build this into algorithm
+                        {
+                            subArrays.Add(new List<int>(curProduct));
+                        }
+
+                        j++;
+
+                        if (j < arr.Length)
+                        {
+                            product *= arr[j];
+                        }
+                    }
+                }
+
+                i++;
+            }
+
+            return subArrays;
+        }
+
 
         public static int TripletSumLessThan(int[] arr, int targetSum)
         {

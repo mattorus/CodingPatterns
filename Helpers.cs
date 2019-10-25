@@ -56,10 +56,13 @@ namespace CodingPatterns
             Console.WriteLine("]");
         }
 
-        public static void PrintListList(IList<IList<int>> numLists)
+        public static void PrintListList(IList<IList<int>> numLists, bool separateLines = false)
         {
-            Console.WriteLine("  [");
-
+            Console.Write("  [");
+            if (separateLines)
+            {
+                Console.WriteLine();
+            }
             for (int i = 0; i < numLists.Count; i++)
             {
                 Console.Write("   [");
@@ -81,7 +84,10 @@ namespace CodingPatterns
                     Console.Write(",");
                 }
 
-                Console.WriteLine();
+                if (separateLines)
+                {
+                    Console.WriteLine();
+                }
             }
 
             Console.WriteLine("  ]");

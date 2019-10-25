@@ -127,7 +127,120 @@ namespace CodingPatterns.Patterns
             subArrays = SubarraysProductLessThan(arr, targetSum);
             Helpers.PrintListList(subArrays);
 
+            name = "DutchFlagQuickSort";
+            Helpers.PrintStartFunctionTest(name);
+            arr = new[] { 1, 0, 2, 1, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagQuickSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+            arr = new[] { 2, 2, 0, 1, 2, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagQuickSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+            arr = new[] { 2, 0, 2, 0, 1, 0, 2, 1, 0, 2, 0, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagQuickSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+            arr = new[] { 1, 1, 1, 1, 1, 2, 1, 1, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagQuickSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+
+            name = "DutchFlagSort";
+            Helpers.PrintStartFunctionTest(name);
+            arr = new[] { 1, 0, 2, 1, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+            arr = new[] { 2, 2, 0, 1, 2, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+            arr = new[] { 2, 0, 2, 0, 1, 0, 2, 1, 0, 2, 0, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+            arr = new[] { 1, 1, 1, 1, 1, 2, 1, 1, 0 };
+            Helpers.PrintArray(arr);
+            DutchFlagSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+            arr = new[] { 0, 1, 1, 1, 1, 1, 1, 1, 2 };
+            Helpers.PrintArray(arr);
+            DutchFlagSort(arr);
+            Console.Write("->");
+            Helpers.PrintArray(arr);
+
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static void DutchFlagSort(int[] arr)
+        {
+            int i = 0, j = 0, k = 0;
+
+            if (arr == null)
+            {
+                return;
+            }
+
+            k = arr.Length - 1;
+
+            while (j < arr.Length && j <= k)
+            {
+                if (arr[j] == 0)
+                {
+                    Helpers.Swap(arr, i, j);
+                    i++;
+                    j++;
+                }
+                else if (arr[j] == 2)
+                {
+                    Helpers.Swap(arr, k, j);
+                    k--;
+                }
+                else
+                {
+                    j++;
+                }
+            }
+        }
+
+        public static void DutchFlagQuickSort(int[] arr, int p = 0, int r = Int32.MaxValue)
+        {
+            int q = p, j = p;
+            
+            if (arr == null || arr.Length < 2 || (r != Int32.MaxValue && r <= p))
+            {
+                return;
+            }
+
+            if (r == Int32.MaxValue)
+            {
+                r = arr.Length - 1;
+            }
+
+            while (j < r)
+            {
+                if (arr[j] <= arr[r])
+                {
+                    Helpers.Swap(arr, q++, j++);
+                }
+                else
+                {
+                    j++;
+                }
+            }
+
+            Helpers.Swap(arr, q, r);
+            DutchFlagQuickSort(arr, p, q - 1);
+            DutchFlagQuickSort(arr, q + 1, r);
         }
 
         public static IList<IList<int>> SubarraysProductLessThan(int[] arr, int targetSum)

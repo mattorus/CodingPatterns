@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace CodingPatterns.Algorithms
+namespace CodingPatterns.Patterns
 {
-    class DepthFirstSearch
+    class DFS
     {
-
-        public DepthFirstSearch() { }
-
         public static void RunTests()
         {
-            string testPattern = "DEPTHFIRSTSEARCH";
+            string testPattern = "DFS";
             Helpers.PrintStartTests(testPattern);
             Console.WriteLine("PathsForSumIter");
             Console.WriteLine("--------------------------");
@@ -66,7 +64,53 @@ namespace CodingPatterns.Algorithms
             numPaths = PathsForSumRec(root, sum);
             Console.WriteLine($"numPaths: {numPaths}");
 
+            string name = "TreeDiameter";
+            Helpers.PrintStartFunctionTest(name);
+            var treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+            root = new TreeNode(1);
+            root.Left = new TreeNode(2);
+            root.Right = new TreeNode(3);
+            root.Left.Left = new TreeNode(4);
+            root.Right.Left = new TreeNode(5);
+            root.Right.Right = new TreeNode(6);
+            treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+            root.Left.Left = null;
+            root.Right.Left.Left = new TreeNode(7);
+            root.Right.Left.Right = new TreeNode(8);
+            root.Right.Right.Left = new TreeNode(9);
+            root.Right.Left.Right.Left = new TreeNode(10);
+            root.Right.Right.Left.Left = new TreeNode(11);
+            treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+            root.Right.Left.Right.Left.Left = new TreeNode(9);
+            treeInfo = TreeDiameter(root);
+            Console.WriteLine($"maxPath: {treeInfo.Item1}, maxDepth: {treeInfo.Item2}");
+
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static (int MaxPath, int MaxDepth) TreeDiameter(TreeNode root)
+        {
+            if (root == null)
+            {
+                return (0, 0);
+            }
+
+            if (root.Left == null && root.Right == null)
+            {
+                return (0, 1);
+            }
+
+            var leftInfo = TreeDiameter(root.Left);
+            var rightInfo = TreeDiameter(root.Right);
+            
+            int maxDepth = 1 + Math.Max(leftInfo.MaxDepth, rightInfo.MaxDepth);            
+            int maxChildPath = Math.Max(leftInfo.MaxPath, rightInfo.MaxPath);
+            int maxPath = 1 + leftInfo.MaxDepth + rightInfo.MaxDepth;
+
+            return (Math.Max(maxPath, maxChildPath), maxDepth);
         }
 
         // TreeDFS
@@ -103,7 +147,7 @@ namespace CodingPatterns.Algorithms
                     sum -= curNode.Val;
 
                     if (treeStack.Count == 0)
-                    {   
+                    {
                         break;
                     }
                     else
@@ -122,7 +166,7 @@ namespace CodingPatterns.Algorithms
                 treeStack.Push(curNode);
                 // Need to reverse array of existing stack to make perfect copy
                 TreeNode[] tree = treeStack.ToArray();
-                Array.Reverse(tree); 
+                Array.Reverse(tree);
                 leftStack = new Stack<TreeNode>(tree);
                 rightStack = new Stack<TreeNode>(tree);
 
@@ -142,8 +186,7 @@ namespace CodingPatterns.Algorithms
                 return 0;
             }
 
-            
-            if(root.Val == sum)
+            if (root.Val == sum)
             {
                 numPaths++;
             }
@@ -152,7 +195,7 @@ namespace CodingPatterns.Algorithms
             rightNumPaths += PathsForSumRec(root.Right, sum - root.Val) + PathsForSumRec(root.Right, sum);
 
             numPaths += leftNumPaths + rightNumPaths;
-            
+
             return numPaths;
         }
 
@@ -183,7 +226,7 @@ namespace CodingPatterns.Algorithms
                         paths.Add(curList);
                     }
                 }
-                
+
             }
 
             return paths;
@@ -191,4 +234,6 @@ namespace CodingPatterns.Algorithms
 
         // GraphDFS
     }
+
+
 }

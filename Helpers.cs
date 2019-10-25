@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CodingPatterns
 {
@@ -17,7 +18,7 @@ namespace CodingPatterns
 
         public static void PrintStartFunctionTest(string name)
         {
-            Console.WriteLine($"Testing {name}()");
+            Console.WriteLine($"\nTesting {name}()");
             Console.WriteLine("--------------------------");
         }
 
@@ -53,6 +54,43 @@ namespace CodingPatterns
             }
 
             Console.WriteLine("]");
+        }
+
+        public static void PrintListList(IList<IList<int>> numLists, bool separateLines = false)
+        {
+            Console.Write("  [");
+            if (separateLines)
+            {
+                Console.WriteLine();
+            }
+            for (int i = 0; i < numLists.Count; i++)
+            {
+                Console.Write("   [");
+
+                for (int j = 0; j < numLists[i].Count; j++)
+                {
+                    Console.Write(numLists[i][j]);
+
+                    if (j < numLists[i].Count - 1)
+                    {
+                        Console.Write(", ");
+                    }
+                }
+
+                Console.Write("]");
+
+                if (i < numLists.Count - 1)
+                {
+                    Console.Write(",");
+                }
+
+                if (separateLines)
+                {
+                    Console.WriteLine();
+                }
+            }
+
+            Console.WriteLine("  ]");
         }
     }
 }

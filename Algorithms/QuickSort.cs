@@ -48,7 +48,7 @@ namespace CodingPatterns.Algorithms
 
         public static void DoSort(int[] arr, int p, int r)
         {
-            int i, j, q, temp;
+            int j, q;
 
             if (arr == null || arr.Length < 2 || r <= p)
             {

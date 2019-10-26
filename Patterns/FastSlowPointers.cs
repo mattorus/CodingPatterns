@@ -10,6 +10,7 @@ namespace CodingPatterns.Patterns
         public static void RunTests()
         {
             int num;
+            ListNode result;
             string testPattern = "FASTSLOWPOINTERS";
             Helpers.PrintStartTests(testPattern);
 
@@ -70,8 +71,206 @@ namespace CodingPatterns.Patterns
             num = 59412;
             Console.WriteLine($"Is {num} happy? {IsHappyNumber(num)}");
 
+            name = "LinkedListMiddle";
+            Helpers.PrintStartFunctionTest(name);
+            head.Next.Next.Next.Next.Next.Next = new ListNode(6);
+            result = LinkedListMiddle(head);
+            Console.WriteLine($"middleNode: {(result != null ? "" + result.Val : "no middle...?")}");
+            head.Next.Next.Next.Next.Next.Next.Next = new ListNode(5);
+            result = LinkedListMiddle(head);
+            Console.WriteLine($"middleNode: {(result != null ? "" + result.Val : "no middle...?")}");
+            head.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(4);
+            result = LinkedListMiddle(head);
+            Console.WriteLine($"middleNode: {(result != null ? "" + result.Val : "no middle...?")}");
+            head.Next.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(3);
+            result = LinkedListMiddle(head);
+            Console.WriteLine($"middleNode: {(result != null ? "" + result.Val : "no middle...?")}");
+            head.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(2);
+            result = LinkedListMiddle(head);
+            Console.WriteLine($"middleNode: {(result != null ? "" + result.Val : "no middle...?")}");
+            head.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(1);
+            result = LinkedListMiddle(head);
+            Console.WriteLine($"middleNode: {(result != null ? "" + result.Val : "no middle...?")}");
+
+            name = "IsPalindrome";
+            Helpers.PrintStartFunctionTest(name);
+            Helpers.PrintLinkedList(head);
+            Console.WriteLine(IsPalindrome(head));
+            Helpers.PrintLinkedList(head);
+            head = new ListNode(2);
+            head.Next = new ListNode(4);
+            head.Next.Next = new ListNode(6);
+            head.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next = new ListNode(2);
+            Helpers.PrintLinkedList(head);
+            Console.WriteLine(IsPalindrome(head));
+            Helpers.PrintLinkedList(head);
+            head.Next.Next.Next.Next.Next = new ListNode(2);
+            Helpers.PrintLinkedList(head);
+            Console.WriteLine(IsPalindrome(head));
+            Helpers.PrintLinkedList(head);
+            head = new ListNode(2);
+            head.Next = new ListNode(4);
+            head.Next.Next = new ListNode(6);
+            head.Next.Next.Next = new ListNode(6);
+            head.Next.Next.Next.Next = new ListNode(4);
+            Helpers.PrintLinkedList(head);
+            Console.WriteLine(IsPalindrome(head));
+            Helpers.PrintLinkedList(head);
+            head.Next.Next.Next.Next.Next = new ListNode(2);
+            Helpers.PrintLinkedList(head);
+            Console.WriteLine(IsPalindrome(head));
+            Helpers.PrintLinkedList(head);
+
+            name = "IsPalindrome";
+            Helpers.PrintStartFunctionTest(name);
+            head = new ListNode(1);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(3);
+            Helpers.PrintLinkedList(head);
+            Console.WriteLine(IsPalindrome(head));
+            Helpers.PrintLinkedList(head);
+            head = new ListNode(1);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(1);
+            Helpers.PrintLinkedList(head);
+            Console.WriteLine(IsPalindrome(head));
+            Helpers.PrintLinkedList(head);
+
+            name = "RearrangeLinkedList";
+            Helpers.PrintStartFunctionTest(name);
+            head = new ListNode(1);
+            head.Next = new ListNode(3);
+            head.Next.Next = new ListNode(4);
+            head.Next.Next.Next = new ListNode(2);
+            Helpers.PrintLinkedList(head);
+            RearrangeLinkedList(head);
+            Helpers.PrintLinkedList(head);
+            head = new ListNode(1);
+            head.Next = new ListNode(3);
+            head.Next.Next = new ListNode(5);
+            head.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next = new ListNode(2);
+            Helpers.PrintLinkedList(head);
+            RearrangeLinkedList(head);
+            Helpers.PrintLinkedList(head);
+            head = new ListNode(1);
+            head.Next = new ListNode(3);
+            head.Next.Next = new ListNode(5);
+            head.Next.Next.Next = new ListNode(6);
+            head.Next.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next.Next = new ListNode(2);
+            Helpers.PrintLinkedList(head);
+            RearrangeLinkedList(head);
+            Helpers.PrintLinkedList(head);
+            head = new ListNode(2);
+            head.Next = new ListNode(4);
+            head.Next.Next = new ListNode(6);
+            head.Next.Next.Next = new ListNode(8);
+            head.Next.Next.Next.Next = new ListNode(10);
+            head.Next.Next.Next.Next.Next = new ListNode(12);
+            Helpers.PrintLinkedList(head);
+            RearrangeLinkedList(head);
+            Helpers.PrintLinkedList(head);
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static void RearrangeLinkedList(ListNode head)
+        {
+            ListNode slow = head, fast = head;
+
+            if (head == null)
+            {
+                return;
+            }
+
+            // Find the middle of the linked list
+            while (fast != null && fast.Next != null)
+            {
+                slow = slow.Next;
+                fast = fast.Next.Next;
+            }
+
+            // Reverse from the middle
+            Reverse(ref slow);
+
+            // Rearrange head -> middle -> head.next -> middle.next -> ... |
+            fast = head;
+            while (fast.Next != slow && fast != slow) 
+            {
+                ListNode fastTemp = fast.Next, slowTemp = slow.Next;
+                fast.Next = slow;
+                fast = fast.Next;
+                fast.Next = fastTemp;
+                fast = fast.Next;
+                slow = slowTemp;
+            }
+        }
+
+        private static void Reverse(ref ListNode head)
+        {
+            ListNode prev = null;
+
+            while (head != null)
+            {
+                ListNode next = head.Next;
+                head.Next = prev;
+                prev = head;
+                head = next;
+            }
+
+            head = prev;
+        }
+
+        public static bool IsPalindrome(ListNode head)
+        {
+            ListNode slow = head, fast = head, temp = null;
+            bool isPal = true;
+
+            if (head == null || head.Next == null)
+            {
+                return true;
+            }
+
+            while (fast != null && fast.Next != null)
+            {
+                slow = slow.Next;
+                fast = fast.Next.Next;
+            }
+
+            Reverse(ref slow);
+            temp = slow;
+            fast = head;
+
+            while (slow.Next != null)
+            {
+                isPal = isPal && (fast.Val == slow.Val);
+                slow = slow.Next;
+                fast = fast.Next;
+            }
+
+            Reverse(ref temp);
+
+            return isPal;
+        }
+
+        public static ListNode LinkedListMiddle(ListNode head)
+        {
+            ListNode slow = head, fast = head;
+
+            if (head == null)
+            {
+                return null;
+            }
+
+            while (fast != null && fast.Next != null)
+            {
+                fast = fast.Next.Next;
+                slow = slow.Next;
+            }
+
+            return slow;
         }
 
         public static bool IsHappyNumber(int n)

@@ -9,6 +9,7 @@ namespace CodingPatterns.Patterns
 
         public static void RunTests()
         {
+            int[] arr;
             int num;
             ListNode result;
             string testPattern = "FASTSLOWPOINTERS";
@@ -173,7 +174,74 @@ namespace CodingPatterns.Patterns
             RearrangeLinkedList(head);
             Helpers.PrintLinkedList(head);
 
+            name = "RearrangeLinkedList";
+            Helpers.PrintStartFunctionTest(name);
+            arr = new int[] { 1, 2, -1, 2, 2 };
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"->{HasCycle(arr)}");
+            arr = new int[] { 2, 2, -1, 2 };
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"->{HasCycle(arr)}");
+            arr = new int[] { 2, 1, -1, -2 };
+            Helpers.PrintArray(arr);
+            Console.WriteLine($"->{HasCycle(arr)}");
+
+
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static bool HasCycle(int[] arr)
+        {
+            int fast = 0, slow = 0, posCount = 0, negCount = 0;
+
+            if (arr == null)
+            {
+                return false;
+            }
+
+            // Use fast (+1 step) & slow (+2 steps) pointers and find where they meet
+            do
+            {
+                // Array is circular, so forward & backward movements need wraparound logic: arr[0] <-> arr[arr.Length - 1]                
+                slow = CircularArrayMove(slow + arr[slow], arr.Length);
+                fast = CircularArrayMove(fast + arr[fast], arr.Length);
+                fast = CircularArrayMove(fast + arr[fast], arr.Length);
+
+            } while (fast != slow);
+
+            // Move from meeting point until arrive back at meeting point, keeping track of positive & negative moves
+            do
+            {
+                if (arr[slow] > 0)
+                {
+                    posCount++;
+                }
+                else
+                {
+                    negCount++;
+                }
+
+                slow = CircularArrayMove(slow + arr[slow], arr.Length);
+
+            } while (fast != slow);
+            
+            return !(posCount > 0 && negCount > 0);
+        }
+
+        private static int CircularArrayMove(int num, int length)
+        {
+            if (num < 0)
+            {
+                return length + num;
+            }
+            else if (num >= length)
+            {
+                return num - length;
+            }
+            else
+            {
+                return num;
+            }
         }
 
         public static void RearrangeLinkedList(ListNode head)

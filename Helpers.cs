@@ -70,7 +70,7 @@ namespace CodingPatterns
 
             Console.WriteLine("]");
         }
-
+      
         public static void PrintList(IList<int[]> numArrs)
         {
             Console.WriteLine(" [");
@@ -80,7 +80,7 @@ namespace CodingPatterns
             }
             Console.WriteLine(" ]");
         }
-
+      
         public static void PrintListList(IList<IList<int>> numLists, bool separateLines = false)
         {
             Console.Write("  [");

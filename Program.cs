@@ -27,6 +27,7 @@ namespace CodingPatterns
             SlidingWindow.RunTests();
             TwoPointers.RunTests();
             FastSlowPointers.RunTests();
+            MergeIntervals.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
         }

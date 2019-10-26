@@ -36,6 +36,21 @@ namespace CodingPatterns
             Console.WriteLine("     --------------------------\n");
         }
 
+        public static void PrintLinkedList(ListNode head)
+        {
+            while(head != null)
+            {
+                Console.Write(head.Val);
+                if (head.Next != null)
+                {
+                    Console.Write("->");
+                }
+
+                head = head.Next;
+            }
+            Console.WriteLine();
+        }
+
         public static void PrintArray(int[] nums)
         {
             if (nums == null)
@@ -55,7 +70,17 @@ namespace CodingPatterns
 
             Console.WriteLine("]");
         }
-
+      
+        public static void PrintList(IList<int[]> numArrs)
+        {
+            Console.WriteLine(" [");
+            foreach (int[] nums in numArrs)
+            {
+                PrintArray(nums);
+            }
+            Console.WriteLine(" ]");
+        }
+      
         public static void PrintListList(IList<IList<int>> numLists, bool separateLines = false)
         {
             Console.Write("  [");

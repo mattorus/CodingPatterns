@@ -31,6 +31,12 @@ namespace CodingPatterns
             MergeIntervals.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
+
+            Console.WriteLine("----------------------START HEAP TESTS----------------------");
+
+            HeapTest.RunTests();
+
+            Console.WriteLine("----------------------END HEAP TESTS----------------------");
         }
     }
 }

@@ -14,17 +14,17 @@ namespace CodingPatterns
             int left = (index * 2) + 1;
             int right = left + 1;
 
-            if (parent >= 0 && _heap[index] > _heap[parent])
+            if (parent >= 0 && _heap[index][0] > _heap[parent][0])
             {
                 Helpers.Swap(_heap, index, parent);
                 Heapify(parent);
             }
-            else if (left <= _end && _heap[index] < _heap[left])
+            else if (left <= _end && _heap[index][0] < _heap[left][0])
             {
                 Helpers.Swap(_heap, index, left);
                 Heapify(left);
             }
-            else if (right <= _end && _heap[index] < _heap[right])
+            else if (right <= _end && _heap[index][0] < _heap[right][0])
             {
                 Helpers.Swap(_heap, index, right);
                 Heapify(right);

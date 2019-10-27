@@ -7,20 +7,20 @@ namespace CodingPatterns
     abstract class Heap
     {
         protected int _end;
-        protected int[] _heap;
+        protected int[][] _heap;
         protected static int _minSize = 5;
 
         public int Count { get { return _end; } }
 
         public Heap(int size = 5)
         {
-            _heap = new int[(size < _minSize ? _minSize : size)];
+            _heap = new int[(size < _minSize ? _minSize : size)][];
             _end = 0;
         }
 
-        public void Add(int num)
+        public void Add(int[] nums)
         {
-            _heap[_end] = num;
+            _heap[_end] = nums;
             Heapify(_end);
             _end++;
 
@@ -30,15 +30,16 @@ namespace CodingPatterns
             }
         }
 
-        public int Remove()
+        public int[] Remove()
         {
-            int root = _heap[0];
+            int[] root = _heap[0];
             if (_end == 0)
             {
-                return Int32.MinValue;
+                return new int[] { -1, -1};
             }
 
-            _heap[0] = _heap[--_end];
+            _heap[0] = _heap[_end];
+            _end--;
             Heapify(0);
 
             return root;
@@ -48,7 +49,7 @@ namespace CodingPatterns
 
         private void Grow()
         {
-            int[] tempHeap = new int[(_heap.Length * 2) + 1];
+            int[][] tempHeap = new int[(_heap.Length * 2) + 1][];
 
             Array.Copy(_heap, 0, tempHeap, 0, _heap.Length);
             _heap = tempHeap;
@@ -61,7 +62,7 @@ namespace CodingPatterns
             stringBuilder.Append("  [");
             for (int i = 0; i < _end; i++)
             {
-                stringBuilder.Append(_heap[i]);
+                stringBuilder.Append($"[{_heap[i][0]},{_heap[i][1]}]");
                 if (i != _end - 1)
                 {
                     stringBuilder.Append(", ");
@@ -78,62 +79,71 @@ namespace CodingPatterns
     {
         public static void RunTests()
         {
-            MaxHeap maxHeap = new MaxHeap(0);
-            MinHeap minHeap = new MinHeap(0);
+            MaxHeap maxHeap;
+            MinHeap minHeap;
+            int[] nums;
+
+
+            maxHeap = new MaxHeap(0);
+            minHeap = new MinHeap(0);
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(3);
-            minHeap.Add(3);
+            nums = new int[] { 4, 5 };
+            maxHeap.Add(nums);
+            minHeap.Add(nums);
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(1);
-            minHeap.Add(1);
+            nums = new int[] { 2, 3 };
+            maxHeap.Add(nums);
+            minHeap.Add(nums);
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(2);
-            minHeap.Add(2);
+            nums = new int[] { 2, 4 };
+            maxHeap.Add(nums);
+            minHeap.Add(nums);
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(5);
-            minHeap.Add(5);
+            nums = new int[] { 3, 5 };
+            maxHeap.Add(nums);
+            minHeap.Add(nums);
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(9);
-            minHeap.Add(9);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(4);
-            minHeap.Add(4);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(25);
-            minHeap.Add(25);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(8);
-            minHeap.Add(8);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(6);
-            minHeap.Add(6);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(3);
-            minHeap.Add(3);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(12);
-            minHeap.Add(12);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(7);
-            minHeap.Add(7);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
-            maxHeap.Add(0);
-            minHeap.Add(0);
-            Console.WriteLine(maxHeap.ToString());
-            Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(9);
+            //minHeap.Add(9);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(4);
+            //minHeap.Add(4);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(25);
+            //minHeap.Add(25);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(8);
+            //minHeap.Add(8);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(6);
+            //minHeap.Add(6);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(3);
+            //minHeap.Add(3);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(12);
+            //minHeap.Add(12);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(7);
+            //minHeap.Add(7);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
+            //maxHeap.Add(0);
+            //minHeap.Add(0);
+            //Console.WriteLine(maxHeap.ToString());
+            //Console.WriteLine(minHeap.ToString());
         }
 
     }

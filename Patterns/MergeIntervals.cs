@@ -8,8 +8,8 @@ namespace CodingPatterns.Patterns
     {
         public static void RunTests()
         {
-            List<int[]> intervals, left, right, appts;
-            List<int[]> result = new List<int[]>();
+            List<int[]> intervals, left, right, appts, meetings;
+            List<int[]> result;
             int[] insert;
             string name;
             string testPattern = "MERGEINTERVALS";
@@ -144,8 +144,85 @@ namespace CodingPatterns.Patterns
             Helpers.PrintList(appts);
             Console.WriteLine($"=>{CanAttendAppts(appts)}");
 
+            name = "MinMeetingRooms";
+            Helpers.PrintStartFunctionTest(name);
+            meetings = new List<int[]>
+            {
+                new int[] { 1, 4 },
+                new int[] { 2, 5 },
+                new int[] { 7, 9 }
+            };
+            Helpers.PrintList(meetings);
+            Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+            meetings = new List<int[]>
+            {
+                new int[] { 6, 7 },
+                new int[] { 2, 4 },
+                new int[] { 8, 12 }
+            };
+            Helpers.PrintList(meetings);
+            Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+            meetings = new List<int[]>
+            {
+                new int[] { 1, 4 },
+                new int[] { 2, 3 },
+                new int[] { 3, 6 }
+            };
+            Helpers.PrintList(meetings);
+            Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+            meetings = new List<int[]>
+            {
+                new int[] { 4, 5 },
+                new int[] { 2, 3 },
+                new int[] { 2, 4 },
+                new int[] { 3, 5 }
+            };
+            Helpers.PrintList(meetings);
+            Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+
+
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static int MinMeetingRooms(List<int[]> meetings)
+        {
+            int minRooms = 0, start = 0, end = 0;
+
+            if (meetings == null || meetings.Count < 1)
+            {
+                return 0;
+            }
+
+            // Start with 1 room for all meetings (assume no overlap)
+            minRooms = 1;
+
+            // Sort meetings by start time ascending
+            meetings.Sort((x, y) => x[0].CompareTo(y[0]));
+            
+            // Start with first meeting
+            start = meetings[0][0];
+            end = meetings[0][1];
+
+            // Use merge interval algorithm to find any overlaps
+            for (int i = 1; i < meetings.Count; i++)
+            { 
+                if ((start < meetings[i][0] && meetings[i][0] < end) ||
+                    (meetings[i][0] < start && start < meetings[i][1]))
+                {
+                    // Add 1 room for each additional overlap
+                    minRooms++;
+                    start = Math.Max(start, meetings[i][0]);
+                    end = Math.Min(end, meetings[i][1]);
+                }
+                else
+                {
+                    start = meetings[i][0];
+                    end = meetings[i][1];
+                }
+            }
+
+            return minRooms;
         }
 
         public static bool CanAttendAppts(List<int[]> appts)

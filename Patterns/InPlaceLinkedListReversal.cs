@@ -25,8 +25,60 @@ namespace CodingPatterns.Patterns
             Helpers.PrintLinkedList(reverse);
             Helpers.PrintLinkedList(head);
 
+            name = "ReverseSublist";
+            Helpers.PrintStartFunctionTest(name);
+            head = new ListNode(1);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(3);
+            head.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next = new ListNode(5);
+            Helpers.PrintLinkedList(head);
+            reverse = ReverseSublist(head, 2, 4);
+            Helpers.PrintLinkedList(reverse);
+
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static ListNode ReverseSublist(ListNode head, int p, int q)
+        {
+            ListNode curNode = head, prev = null, next = null;
+            ListNode subTail = head, subHeadPrev = null;
+            int pos = 1;
+
+            if (head == null || p == q)
+            {
+                return head;
+            }
+
+            while (curNode != null && pos < p)
+            {
+                prev = curNode;
+                curNode = curNode.Next;
+                pos++;
+            }
+
+            subHeadPrev = prev;
+            subTail = curNode;
+
+            while (curNode != null && pos <= q)
+            {
+                next = curNode.Next;
+                curNode.Next = prev;
+                prev = curNode;
+                curNode = next;
+                pos++;
+            }            
+
+            if (subHeadPrev == null)
+            {
+                subHeadPrev = head;
+            }
+             
+            subHeadPrev.Next = prev;
+            subTail.Next = curNode;            
+
+            return head;
         }
 
         public static ListNode Reverse(ListNode head)

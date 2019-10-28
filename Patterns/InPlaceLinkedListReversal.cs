@@ -8,6 +8,7 @@ namespace CodingPatterns.Patterns
     {
         public static void RunTests()
         {
+            int k;
             string name;
             ListNode head, reverse;
             string testPattern = "RUNTESTS";
@@ -35,9 +36,110 @@ namespace CodingPatterns.Patterns
             Helpers.PrintLinkedList(head);
             reverse = ReverseSublist(head, 2, 4);
             Helpers.PrintLinkedList(reverse);
+            head = new ListNode(3);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(1);
+            head.Next.Next.Next = new ListNode(6);
+            head.Next.Next.Next.Next = new ListNode(5);
+            head.Next.Next.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next.Next.Next = new ListNode(9);
+            head.Next.Next.Next.Next.Next.Next.Next = new ListNode(8);
+            head.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(7);
+            Helpers.PrintLinkedList(head);
+            reverse = ReverseSublist(head, 1, 9);
+            Helpers.PrintLinkedList(reverse);
+
+            name = "ReverseKSublists";
+            Helpers.PrintStartFunctionTest(name);
+            head = new ListNode(3);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(1);
+            head.Next.Next.Next = new ListNode(6);
+            head.Next.Next.Next.Next = new ListNode(5);
+            head.Next.Next.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next.Next.Next = new ListNode(9);
+            head.Next.Next.Next.Next.Next.Next.Next = new ListNode(8);
+            head.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(7);
+            k = 3;
+            Helpers.PrintLinkedList(head);
+            reverse = ReverseKSublists(head, k);
+            Helpers.PrintLinkedList(reverse);
+            head = new ListNode(3);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(1);
+            head.Next.Next.Next = new ListNode(6);
+            head.Next.Next.Next.Next = new ListNode(5);
+            head.Next.Next.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next.Next.Next = new ListNode(9);
+            head.Next.Next.Next.Next.Next.Next.Next = new ListNode(8);
+            head.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(7);
+            head.Next.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(11);
+            head.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next = new ListNode(10);
+            k = 3;
+            Helpers.PrintLinkedList(head);
+            reverse = ReverseKSublists(head, k);
+            Helpers.PrintLinkedList(reverse);
+            head = new ListNode(3);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(1);
+            k = 4;
+            Helpers.PrintLinkedList(head);
+            reverse = ReverseKSublists(head, k);
+            Helpers.PrintLinkedList(reverse); 
+            head = new ListNode(1);
+            head.Next = new ListNode(2);
+            head.Next.Next = new ListNode(3);
+            head.Next.Next.Next = new ListNode(4);
+            head.Next.Next.Next.Next = new ListNode(5);
+            head.Next.Next.Next.Next.Next = new ListNode(6);
+            head.Next.Next.Next.Next.Next.Next = new ListNode(7);
+            head.Next.Next.Next.Next.Next.Next.Next = new ListNode(8);
+            k = 3;
+            Helpers.PrintLinkedList(head);
+            reverse = ReverseKSublists(head, k);
+            Helpers.PrintLinkedList(reverse);
 
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static ListNode ReverseKSublists(ListNode head, int k)
+        {
+            ListNode curNode = head, prev = null, next = null;
+            ListNode subTail = null, subHeadPrev = null;
+
+            if (head == null || k <= 1)
+            {
+                return head;
+            }
+
+            while (curNode != null)
+            {
+                subHeadPrev = prev;
+                subTail = curNode;
+
+                for (int i = 0; curNode != null && i < k; i++)
+                {
+                    next = curNode.Next;
+                    curNode.Next = prev;
+                    prev = curNode;
+                    curNode = next;
+                }
+
+                if (subHeadPrev != null)
+                {
+                    subHeadPrev.Next = prev;
+                }
+                else
+                {
+                    head = prev;
+                }
+
+                subTail.Next = curNode;
+                prev = subTail;
+            }
+
+            return head;
         }
 
         public static ListNode ReverseSublist(ListNode head, int p, int q)
@@ -68,15 +170,20 @@ namespace CodingPatterns.Patterns
                 prev = curNode;
                 curNode = next;
                 pos++;
-            }            
-
-            if (subHeadPrev == null)
-            {
-                subHeadPrev = head;
             }
-             
-            subHeadPrev.Next = prev;
-            subTail.Next = curNode;            
+
+            if (subHeadPrev != null)
+            {
+                subHeadPrev.Next = prev;
+            }
+            else
+            {
+                head = prev;
+            }
+            
+            
+            subTail.Next = curNode;
+            
 
             return head;
         }

@@ -18,6 +18,16 @@ namespace CodingPatterns
             _end = 0;
         }
 
+        public int[] Peek()
+        {
+            if (_end == 0)
+            {
+                return null;
+            }
+
+            return _heap[0];
+        }
+
         public void Add(int[] nums)
         {
             _heap[_end] = nums;
@@ -38,8 +48,9 @@ namespace CodingPatterns
                 return new int[] { -1, -1};
             }
 
-            _heap[0] = _heap[_end];
             _end--;
+            _heap[0] = _heap[_end];
+            
             Heapify(0);
 
             return root;

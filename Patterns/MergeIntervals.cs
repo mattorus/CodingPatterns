@@ -8,8 +8,7 @@ namespace CodingPatterns.Patterns
     {
         public static void RunTests()
         {
-            List<int[]> intervals, left, right, appts, meetings;
-            List<int[]> result;
+            List<int[]> intervals, left, right, appts, meetings, result, jobs;
             int[] insert;
             string name;
             string testPattern = "MERGEINTERVALS";
@@ -154,6 +153,7 @@ namespace CodingPatterns.Patterns
             };
             Helpers.PrintList(meetings);
             Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+            Console.WriteLine($"->{MinMeetingRoomsHeap(meetings)}");
             meetings = new List<int[]>
             {
                 new int[] { 6, 7 },
@@ -162,6 +162,7 @@ namespace CodingPatterns.Patterns
             };
             Helpers.PrintList(meetings);
             Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+            Console.WriteLine($"->{MinMeetingRoomsHeap(meetings)}");
             meetings = new List<int[]>
             {
                 new int[] { 1, 4 },
@@ -170,6 +171,7 @@ namespace CodingPatterns.Patterns
             };
             Helpers.PrintList(meetings);
             Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+            Console.WriteLine($"->{MinMeetingRoomsHeap(meetings)}");
             meetings = new List<int[]>
             {
                 new int[] { 4, 5 },
@@ -179,10 +181,116 @@ namespace CodingPatterns.Patterns
             };
             Helpers.PrintList(meetings);
             Console.WriteLine($"->{MinMeetingRooms(meetings)}");
+            Console.WriteLine($"->{MinMeetingRoomsHeap(meetings)}");
+
+            name = "MinMeetingRooms";
+            Helpers.PrintStartFunctionTest(name);
+            jobs = new List<int[]>
+            {
+                new int[] { 1, 4, 3 },
+                new int[] { 2, 5, 4 },
+                new int[] { 7, 9, 6 }
+            };
+            Helpers.PrintList(jobs);
+            Console.WriteLine($"maxLoad: {MaxCpuLoad(jobs)}");
+            jobs = new List<int[]>
+            {
+                new int[] { 6, 7, 10 },
+                new int[] { 2, 4, 11 },
+                new int[] { 8, 12, 15 }
+            };
+            Helpers.PrintList(jobs);
+            Console.WriteLine($"maxLoad: {MaxCpuLoad(jobs)}");
+            jobs = new List<int[]>
+            {
+                new int[] { 1, 4, 2 },
+                new int[] { 2, 4, 1 },
+                new int[] { 3, 6, 5 }
+            };
+            Helpers.PrintList(jobs);
+            Console.WriteLine($"maxLoad: {MaxCpuLoad(jobs)}");
 
 
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static int MaxCpuLoad(List<int[]> jobs)
+        {
+            Stack<int> jobStack = new Stack<int>();
+            int[][] start;
+            int[] end;
+            int i = 0, j = 0, cpuLoad = 0, maxLoad = 0;
+
+            if (jobs == null)
+            {
+                return 0;
+            }
+
+            start = new int[jobs.Count][];
+            end = new int[jobs.Count];
+            jobs.Sort((x, y) => x[0].CompareTo(y[0]));
+
+            for (i = 0; i < jobs.Count; i++)
+            {
+                start[i] = new int[] { jobs[i][0], jobs[i][2] };
+                end[i] = jobs[i][1];
+            }
+
+            i = 0;
+            j = 0;
+            while (i < start.Length && j < end.Length)
+            {
+                if (start[i][0] < end[j])
+                {
+                    jobStack.Push(start[i][1]);
+                    cpuLoad += start[i][1];
+                    i++;
+                }
+                else
+                {
+                    cpuLoad -= jobStack.Pop();
+                    j++;
+                }
+
+                maxLoad = Math.Max(maxLoad, cpuLoad);
+            }
+
+            while (i < start.Length)
+            {
+                jobStack.Push(start[i][1]);
+                cpuLoad += start[i][1];
+                i++;
+            }
+
+            maxLoad = Math.Max(maxLoad, cpuLoad);
+
+            return maxLoad;
+        }
+
+        public static int MinMeetingRoomsHeap(List<int[]> meetings)
+        {
+            int minRooms = 0;
+            MinHeap heap = new MinHeap();
+
+            meetings.Sort((x, y) => x[0].CompareTo(y[0]));
+
+            // For each meeting, remove all meetings from heap with end time <= meeting start time
+            // Add meeting to heap
+            // minRooms = Max(minRooms, heap.Count)
+            foreach (int[] meeting in meetings)
+            {
+                while (heap.Peek() != null && meeting[0] >= heap.Peek()[1])
+                {
+                    heap.Remove();
+                }
+
+                heap.Add(meeting);
+                minRooms = Math.Max(minRooms, heap.Count);
+                Console.WriteLine($"heap after adding meeting [{meeting[0]},{meeting[1]}]:\n{heap.ToString()}");
+            }            
+            
+            return minRooms;
         }
 
         public static int MinMeetingRooms(List<int[]> meetings)

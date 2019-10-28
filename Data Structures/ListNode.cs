@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CodingPatterns
 {
-    public class ListNode
+    class ListNode
     {
         public int Val { get; set; }
         public ListNode Next { get; set; }

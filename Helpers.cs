@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CodingPatterns
 {
-    public class Helpers
+    class Helpers
     {
         public Helpers()
         {

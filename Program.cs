@@ -8,6 +8,11 @@ namespace CodingPatterns
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("----------------------START HEAP TESTS----------------------");
+
+            HeapTest.RunTests();
+
+            Console.WriteLine("----------------------END HEAP TESTS----------------------");
             Console.WriteLine("----------------------START ALGORITHM TESTS----------------------");
             
             SelectionSort.RunTests();
@@ -30,14 +35,9 @@ namespace CodingPatterns
             FastSlowPointers.RunTests();
             MergeIntervals.RunTests();
             CyclicSort.RunTests();
+            InPlaceLinkedListReversal.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
-
-            Console.WriteLine("----------------------START HEAP TESTS----------------------");
-
-            HeapTest.RunTests();
-
-            Console.WriteLine("----------------------END HEAP TESTS----------------------");
         }
     }
 }

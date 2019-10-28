@@ -15,7 +15,7 @@ namespace CodingPatterns.Patterns
             Helpers.PrintStartTests(testPattern);
 
             name = "InPlaceSort";
-            Helpers.PrintStartTests(name);
+            Helpers.PrintStartFunctionTest(name);
             nums = new int[] { 3, 1, 5, 4, 2 };
             Helpers.PrintArray(nums);
             InPlaceSort(nums);
@@ -30,7 +30,7 @@ namespace CodingPatterns.Patterns
             Helpers.PrintArray(nums);
 
             name = "FindMissingNumber";
-            Helpers.PrintStartTests(name);
+            Helpers.PrintStartFunctionTest(name);
             nums = new int[] { 4, 0, 3, 1 };
             Helpers.PrintArray(nums);
             Console.WriteLine($"->{FindMissingNumber(nums)}");
@@ -45,7 +45,7 @@ namespace CodingPatterns.Patterns
             Console.WriteLine($"->{FindMissingNumber(nums)}");
 
             name = "FindAllMissingNums";
-            Helpers.PrintStartTests(name);
+            Helpers.PrintStartFunctionTest(name);
             nums = new int[] { 2, 3, 1, 8, 2, 3, 5, 1 };
             Helpers.PrintArray(nums);
             numbers = FindAllMissingNums(nums);
@@ -73,7 +73,7 @@ namespace CodingPatterns.Patterns
             Helpers.PrintList(numbers);
 
             name = "FindDuplicateNum";
-            Helpers.PrintStartTests(name);
+            Helpers.PrintStartFunctionTest(name);
             nums = new int[] { 1, 4, 4, 3, 2 };
             Helpers.PrintArray(nums);
             Console.Write($"  -> {FindDuplicateNum(nums)}\n");
@@ -100,7 +100,7 @@ namespace CodingPatterns.Patterns
             Console.Write($"  -> {FindDuplicateNum(nums)}\n");
 
             name = "FindAllDuplicateNums";
-            Helpers.PrintStartTests(name);
+            Helpers.PrintStartFunctionTest(name);
             nums = new int[] { 3, 4, 4, 5, 5 };
             Helpers.PrintArray(nums);
             numbers = FindAllDuplicateNums(nums);
@@ -128,7 +128,7 @@ namespace CodingPatterns.Patterns
             Helpers.PrintList(numbers);
 
             name = "FindCorruptPair";
-            Helpers.PrintStartTests(name);
+            Helpers.PrintStartFunctionTest(name);
             nums = new int[] { 3, 1, 2, 5, 2 };
             Helpers.PrintArray(nums);
             numsArr = FindCorruptPair(nums);
@@ -151,7 +151,7 @@ namespace CodingPatterns.Patterns
             Helpers.PrintArray(numsArr);
 
             name = "SmallestMissingPosNum";
-            Helpers.PrintStartTests(name);
+            Helpers.PrintStartFunctionTest(name);
             nums = new int[] { -3, 1, 5, 4, 2 };
             Helpers.PrintArray(nums);
             Console.WriteLine($"->{SmallestMissingPosNum(nums)}");

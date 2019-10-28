@@ -29,6 +29,7 @@ namespace CodingPatterns
 
             FastSlowPointers.RunTests();
             MergeIntervals.RunTests();
+            CyclicSort.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
 

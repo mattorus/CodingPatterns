@@ -87,7 +87,12 @@ namespace CodingPatterns
             }
             Console.WriteLine(" ]");
         }
-      
+
+        public static void PrintList(List<int> nums)
+        {
+            PrintArray(nums.ToArray());
+        }
+
         public static void PrintListList(IList<IList<int>> numLists, bool separateLines = false)
         {
             Console.Write("  [");

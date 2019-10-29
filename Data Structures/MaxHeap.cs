@@ -4,9 +4,9 @@ using System.Text;
 
 namespace CodingPatterns
 {
-    class MaxHeap : Heap
+    class MaxHeap<T> : Heap<T>
     {
-        public MaxHeap(int size = 50) : base(size) { }
+        public MaxHeap(Comparison<T> comparison = default, int size = 50) : base(comparison, size) { }
 
         public override void Heapify(int index)
         {
@@ -14,17 +14,17 @@ namespace CodingPatterns
             int left = (index * 2) + 1;
             int right = left + 1;
 
-            if (parent >= 0 && _heap[index][0] > _heap[parent][0])
+            if (parent >= 0 && Compare(_heap[index], _heap[parent]) > 0)
             {
                 Helpers.Swap(_heap, index, parent);
                 Heapify(parent);
             }
-            else if (left < _end && _heap[index][0] < _heap[left][0])
+            else if (left < _end && Compare(_heap[index], _heap[parent]) < 0)
             {
                 Helpers.Swap(_heap, index, left);
                 Heapify(left);
             }
-            else if (right < _end && _heap[index][0] < _heap[right][0])
+            else if (right < _end && Compare(_heap[index], _heap[parent]) < 0)
             {
                 Helpers.Swap(_heap, index, right);
                 Heapify(right);

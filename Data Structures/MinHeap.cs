@@ -4,9 +4,9 @@ using System.Text;
 
 namespace CodingPatterns
 {
-    class MinHeap : Heap
+    class MinHeap<T> : Heap<T>
     {
-        public MinHeap(int size = 50) : base(size) { }
+        public MinHeap(Comparison<T> comparison = default, int size = 50) : base(comparison, size) { }
 
         public override void Heapify(int index)
         {
@@ -14,17 +14,17 @@ namespace CodingPatterns
             int left = (index * 2) + 1;
             int right = left + 1;
 
-            if (parent >= 0 && _heap[index][1] < _heap[parent][1])
+            if (parent >= 0 && Compare(_heap[index], _heap[parent]) < 0)
             {
                 Helpers.Swap(_heap, index, parent);
                 Heapify(parent);
             }
-            else if (left < _end && _heap[index][1] > _heap[left][1])
+            else if (left < _end && Compare(_heap[index], _heap[parent]) > 0)
             {
                 Helpers.Swap(_heap, index, left);
                 Heapify(left);
             }
-            else if (right < _end && _heap[index][1] > _heap[right][1])
+            else if (right < _end && Compare(_heap[index], _heap[parent]) > 0)
             {
                 Helpers.Swap(_heap, index, right);
                 Heapify(right);

@@ -271,7 +271,7 @@ namespace CodingPatterns.Patterns
         public static int MinMeetingRoomsHeap(List<int[]> meetings)
         {
             int minRooms = 0;
-            MinHeap heap = new MinHeap();
+            MinHeap<int[]> heap = new MinHeap<int[]>((x, y) => x[1].CompareTo(y[1]));
 
             meetings.Sort((x, y) => x[0].CompareTo(y[0]));
 

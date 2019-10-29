@@ -5,8 +5,16 @@ namespace CodingPatterns
 {
     class Helpers
     {
+        
         public Helpers()
         {
+        }
+
+        public static void Swap<T>(T[] arr, int i, int j)
+        {
+            T temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
 
         public static void Swap(int[] arr, int i, int j)

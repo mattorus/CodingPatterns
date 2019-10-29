@@ -1,6 +1,7 @@
 ﻿using System;
 using CodingPatterns.Algorithms;
 using CodingPatterns.Patterns;
+using CodingPatterns.Data_Structures;
 
 namespace CodingPatterns
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CodingPatterns
@@ -36,7 +35,7 @@ namespace CodingPatterns
         {
             if (_end == 0)
             {
-                return default;
+                throw new NullReferenceException("Heap is empty.");
             }
 
             return _heap[0];
@@ -57,6 +56,7 @@ namespace CodingPatterns
         public T Remove()
         {
             T root = _heap[0];
+
             if (_end == 0)
             {
                 return default;
@@ -87,6 +87,7 @@ namespace CodingPatterns
             if (item.GetType() == typeof(int[]))
             {
                 var array = (item as int[]);
+
                 for (int i = 0; i < array.Length; i++)
                 {
                     stringBuilder.Append(array[i]);
@@ -110,9 +111,11 @@ namespace CodingPatterns
             StringBuilder stringBuilder = new StringBuilder();
 
             stringBuilder.Append("  [");
+
             for (int i = 0; i < _end; i++)
             {
                 string str;
+
                 if (_heap is IEnumerable<T>)
                 {
                     str = GetString(_heap[i], ",");
@@ -121,7 +124,9 @@ namespace CodingPatterns
                 {
                     str = String.Join(",", _heap[i]);
                 }
+
                 stringBuilder.Append($"[{str}]");
+
                 if (i != _end - 1)
                 {
                     stringBuilder.Append(", ");

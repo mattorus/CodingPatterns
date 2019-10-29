@@ -14,8 +14,8 @@ namespace CodingPatterns.Data_Structures
             MinHeap<int> minHeap2;
             int[] nums;
 
-            maxHeap = new MaxHeap<int[]>((x, y) => x[0].CompareTo(y[0]));
-            minHeap = new MinHeap<int[]>((x, y) => x[1].CompareTo(y[1]));
+            maxHeap = new MaxHeap<int[]>(Constants.CompareCoordX);
+            minHeap = new MinHeap<int[]>(Constants.CompareCoordY);
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
             nums = new int[] { 4, 5 };
@@ -39,8 +39,8 @@ namespace CodingPatterns.Data_Structures
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
 
-            maxHeap2 = new MaxHeap<int>((x, y) => x.CompareTo(y));
-            minHeap2 = new MinHeap<int>((x, y) => x.CompareTo(y));
+            maxHeap2 = new MaxHeap<int>(Constants.CompareInt);
+            minHeap2 = new MinHeap<int>(Constants.CompareInt);
             maxHeap2.Add(9);
             minHeap2.Add(9);
             Console.WriteLine(maxHeap2.ToString());

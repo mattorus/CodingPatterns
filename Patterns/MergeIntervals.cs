@@ -271,7 +271,7 @@ namespace CodingPatterns.Patterns
         public static int MinMeetingRoomsHeap(List<int[]> meetings)
         {
             int minRooms = 0;
-            MinHeap<int[]> heap = new MinHeap<int[]>((x, y) => x[1].CompareTo(y[1]));
+            MinHeap<int[]> heap = new MinHeap<int[]>(Constants.CompareCoordY);
 
             meetings.Sort((x, y) => x[0].CompareTo(y[0]));
 
@@ -280,7 +280,7 @@ namespace CodingPatterns.Patterns
             // minRooms = Max(minRooms, heap.Count)
             foreach (int[] meeting in meetings)
             {
-                while (heap.Peek() != null && meeting[0] >= heap.Peek()[1])
+                while (heap.Count > 0 && meeting[0] >= heap.Peek()[1])
                 {
                     heap.Remove();
                 }

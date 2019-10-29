@@ -19,7 +19,7 @@ namespace CodingPatterns
         {
             if (comparison == null)
             {
-                comparison = default;
+                _comparison = default;
             }
 
             _comparison = comparison;
@@ -140,6 +140,8 @@ namespace CodingPatterns
         {
             MaxHeap<int[]> maxHeap;
             MinHeap<int[]> minHeap;
+            MaxHeap<int> maxHeap2;
+            MinHeap<int> minHeap2;
             int[] nums;
             
             maxHeap = new MaxHeap<int[]>((x, y) => x[0].CompareTo(y[0]));
@@ -166,42 +168,45 @@ namespace CodingPatterns
             minHeap.Add(nums);
             Console.WriteLine(maxHeap.ToString());
             Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(9);
-            //minHeap.Add(9);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(4);
-            //minHeap.Add(4);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(25);
-            //minHeap.Add(25);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(8);
-            //minHeap.Add(8);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(6);
-            //minHeap.Add(6);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(3);
-            //minHeap.Add(3);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(12);
-            //minHeap.Add(12);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(7);
-            //minHeap.Add(7);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
-            //maxHeap.Add(0);
-            //minHeap.Add(0);
-            //Console.WriteLine(maxHeap.ToString());
-            //Console.WriteLine(minHeap.ToString());
+
+            maxHeap2 = new MaxHeap<int>((x, y) => x.CompareTo(y));
+            minHeap2 = new MinHeap<int>((x, y) => x.CompareTo(y));
+            maxHeap2.Add(9);
+            minHeap2.Add(9);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(4);
+            minHeap2.Add(4);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(25);
+            minHeap2.Add(25);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(8);
+            minHeap2.Add(8);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(6);
+            minHeap2.Add(6);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(3);
+            minHeap2.Add(3);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(12);
+            minHeap2.Add(12);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(7);
+            minHeap2.Add(7);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
+            maxHeap2.Add(0);
+            minHeap2.Add(0);
+            Console.WriteLine(maxHeap2.ToString());
+            Console.WriteLine(minHeap2.ToString());
         }
 
     }

@@ -19,12 +19,12 @@ namespace CodingPatterns
                 Helpers.Swap(_heap, index, parent);
                 Heapify(parent);
             }
-            else if (left < _end && Compare(_heap[index], _heap[parent]) < 0)
+            else if (left < _end && Compare(_heap[index], _heap[left]) < 0)
             {
                 Helpers.Swap(_heap, index, left);
                 Heapify(left);
             }
-            else if (right < _end && Compare(_heap[index], _heap[parent]) < 0)
+            else if (right < _end && Compare(_heap[index], _heap[right]) < 0)
             {
                 Helpers.Swap(_heap, index, right);
                 Heapify(right);

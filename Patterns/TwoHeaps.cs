@@ -8,6 +8,8 @@ namespace CodingPatterns.Patterns
     {
         public static void RunTests()
         {
+            int[] nums;
+            int k;
             string name;
             string testPattern = "RUNTESTS";
             NumberStream testMedian;
@@ -76,9 +78,46 @@ namespace CodingPatterns.Patterns
             Console.WriteLine($"Right: {testMedian.Right.ToString()}");
             Console.WriteLine($"Median: {testMedian.FindMedian()}");
 
+            name = "NumberStreamMedian";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 1, 2, -1, 3, 5 };
+            k = 2;
+            Helpers.PrintArray(nums);
+            Console.Write("->");
+            Helpers.PrintArray<double>(MedianOfKSubarrays(nums, k));
+            nums = new int[] { 1, 2, -1, 3, 5 };
+            k = 3;
+            Helpers.PrintArray(nums);
+            Console.Write("->");
+            Helpers.PrintArray<double>(MedianOfKSubarrays(nums, k));
+
 
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static double[] MedianOfKSubarrays(int[] nums, int k)
+        {
+            NumberStream numStream = new NumberStream();
+            List<double> medians = new List<double>();
+
+            if (nums == null || k < 1)
+            {
+                return null;
+            }
+
+            for (int i = 0; i + k - 1 < nums.Length; i++)
+            {
+                for (int j = i; j < nums.Length && j < i + k; j++)
+                {
+                    numStream.InsertNum(nums[j]);
+                }
+
+                medians.Add(numStream.FindMedian());
+                numStream = new NumberStream();
+            }
+
+            return medians.ToArray();
         }
 
         public class NumberStream

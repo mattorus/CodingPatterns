@@ -66,6 +66,26 @@ namespace CodingPatterns
             Console.WriteLine();
         }
 
+        public static void PrintArray<T>(T[] nums)
+        {
+            if (nums == null)
+            {
+                return;
+            }
+
+            Console.Write("  [");
+            for (int i = 0; i < nums.Length; i++)
+            {
+                Console.Write(nums[i]);
+                if (i != nums.Length - 1)
+                {
+                    Console.Write(", ");
+                }
+            }
+
+            Console.WriteLine("]");
+        }
+
         public static void PrintArray(int[] nums)
         {
             if (nums == null)

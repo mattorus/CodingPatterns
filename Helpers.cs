@@ -123,14 +123,14 @@ namespace CodingPatterns
 
         public static void PrintListList(IList<IList<int>> numLists, bool separateLines = false)
         {
-            Console.Write("  [");
+            Console.Write("  [ ");
             if (separateLines)
             {
                 Console.WriteLine();
             }
             for (int i = 0; i < numLists.Count; i++)
             {
-                Console.Write("   [");
+                Console.Write("[");
 
                 for (int j = 0; j < numLists[i].Count; j++)
                 {
@@ -146,7 +146,7 @@ namespace CodingPatterns
 
                 if (i < numLists.Count - 1)
                 {
-                    Console.Write(",");
+                    Console.Write(", ");
                 }
 
                 if (separateLines)
@@ -155,7 +155,7 @@ namespace CodingPatterns
                 }
             }
 
-            Console.WriteLine("  ]");
+            Console.WriteLine(" ]");
         }
     }
 }

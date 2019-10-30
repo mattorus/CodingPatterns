@@ -11,7 +11,7 @@ namespace CodingPatterns.Patterns
             int k;
             string name;
             ListNode head, reverse;
-            string testPattern = "RUNTESTS";
+            string testPattern = "INPLACELINKEDLISTREVERSAL";
             Helpers.PrintStartTests(testPattern);
 
             name = "Reverse";

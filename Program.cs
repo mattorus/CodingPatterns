@@ -38,6 +38,7 @@ namespace CodingPatterns
             CyclicSort.RunTests();
             InPlaceLinkedListReversal.RunTests();
             TwoHeaps.RunTests();
+            Subsets.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
         }

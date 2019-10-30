@@ -11,7 +11,7 @@ namespace CodingPatterns.Patterns
             int[] nums;
             int k;
             string name;
-            string testPattern = "RUNTESTS";
+            string testPattern = "TWOHEAPS";
             NumberStream testMedian;
             Helpers.PrintStartTests(testPattern);
 
@@ -87,6 +87,16 @@ namespace CodingPatterns.Patterns
             Helpers.PrintArray<double>(MedianOfKSubarrays(nums, k));
             nums = new int[] { 1, 2, -1, 3, 5 };
             k = 3;
+            Helpers.PrintArray(nums);
+            Console.Write("->");
+            Helpers.PrintArray<double>(MedianOfKSubarrays(nums, k));
+            nums = new int[] { 1, 5, -1, 3, 5, 13, 4, 23, 1, 5, 2, 6, 8, 2 };
+            k = 3;
+            Helpers.PrintArray(nums);
+            Console.Write("->");
+            Helpers.PrintArray<double>(MedianOfKSubarrays(nums, k));
+            nums = new int[] { 1, 5, -1, 3, 5, 13, 4, 23, 1, 5, 2, 6, 8, 2 };
+            k = 8;
             Helpers.PrintArray(nums);
             Console.Write("->");
             Helpers.PrintArray<double>(MedianOfKSubarrays(nums, k));

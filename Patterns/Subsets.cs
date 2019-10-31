@@ -9,7 +9,8 @@ namespace CodingPatterns.Patterns
         public static void RunTests()
         {
             int[] nums;
-            string name;
+            int n;
+            string name, str;
             string testPattern = "SUBSETS";
             Helpers.PrintStartTests(testPattern);
 
@@ -41,6 +42,120 @@ namespace CodingPatterns.Patterns
             Helpers.PrintListList(FindAllPermutations(nums));
             nums = new int[] { 1, 2, 3, 4, 5 };
             Helpers.PrintListList(FindAllPermutations(nums));
+
+            name = "FindCasePermutations";
+            Helpers.PrintStartFunctionTest(name);
+            str = "ad52";
+            Helpers.PrintList(FindCasePermutations(str));
+            str = "ab7c";
+            Helpers.PrintList(FindCasePermutations(str));
+            str = "ab7ca7f56ew";
+            Helpers.PrintList(FindCasePermutations(str));
+
+            name = "FindBalancedParens";
+            Helpers.PrintStartFunctionTest(name);
+            n = 2;
+            Helpers.PrintList(FindBalancedParens(n));
+            n = 3;
+            Helpers.PrintList(FindBalancedParens(n));
+            n = 4;
+            Helpers.PrintList(FindBalancedParens(n));
+
+
+
+            Helpers.PrintEndTests(testPattern);
+        }
+
+        public static IList<string> FindBalancedParens(int n)
+        {
+            IList<string> combinations = new List<string>();
+            IList<(string str, int openCount, int closeCount)> permutations = new List<(string str, int openCount, int closeCount)>();
+
+            if (n < 1)
+            {
+                return null;
+            }
+
+            permutations.Add(("", 0, 0));
+
+            for (int i = 0; i < 2 * n; i++)
+            {
+                IList<(string str, int openCount, int closeCount)> temp = new List<(string str, int openCount, int closeCount)>();
+                int size = permutations.Count;
+
+                for (int j = 0; j < size; j++)
+                {                                        
+                    StringBuilder sb = new StringBuilder(permutations[j].str);
+                    int openCount = permutations[j].openCount;
+                    int closeCount = permutations[j].closeCount;
+
+                    // OpenCount can't be > N
+                    if (openCount < n)
+                    {
+                        string tempStr = sb.ToString() + '(';
+                        temp.Add((tempStr, openCount + 1, closeCount));
+                            
+                        if (i == (2 * n) - 1)
+                        {
+                            combinations.Add(tempStr);
+                        }
+                    }
+
+                    // To keep parentheses balanced, we can add a ')' only when we have openCount > closedCount
+                    if (openCount > closeCount)
+                    {
+                        string tempStr = sb.ToString() + ')';
+                        temp.Add((tempStr, openCount, closeCount + 1));
+
+                        if (i == (2 * n) - 1)
+                        {
+                            combinations.Add(tempStr);
+                        }
+                    }                    
+                }
+
+                permutations = new List<(string str, int openCount, int closeCount)>(temp);
+            }
+
+            return combinations;
+        }
+
+        public static IList<string> FindCasePermutations(string str)
+        {
+            IList<string> permutations = new List<string>();
+
+            if (String.IsNullOrEmpty(str))
+            {
+                return null;
+            }
+
+            permutations.Add(str);
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                int size = permutations.Count;
+
+                for (int j = 0; j < size; j++)
+                {
+                    if (Char.IsLetter(str, i))
+                    {
+                        StringBuilder sb = new StringBuilder(permutations[j]);
+
+                        if (Char.IsUpper(str[i]))
+                        {
+                            sb[i] = Char.ToLower(str[i]);
+                        }
+                        else
+                        {
+                            sb[i] = Char.ToUpper(str[i]);
+                        }
+
+                        permutations.Add(sb.ToString());
+                    }
+                }
+            }
+
+            return permutations;
         }
 
         public static IList<IList<int>> FindAllPermutations(int[] nums)

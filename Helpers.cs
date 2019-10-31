@@ -66,18 +66,18 @@ namespace CodingPatterns
             Console.WriteLine();
         }
 
-        public static void PrintArray<T>(T[] nums)
+        public static void PrintArray<T>(T[] items)
         {
-            if (nums == null)
+            if (items == null)
             {
                 return;
             }
 
             Console.Write("  [");
-            for (int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < items.Length; i++)
             {
-                Console.Write(nums[i]);
-                if (i != nums.Length - 1)
+                Console.Write(items[i]);
+                if (i != items.Length - 1)
                 {
                     Console.Write(", ");
                 }
@@ -106,6 +106,21 @@ namespace CodingPatterns
             Console.WriteLine("]");
         }
       
+        public static void PrintList<T>(IList<T> items)
+        {
+            Console.Write(" [");
+            for (int i = 0; i < items.Count; i++)
+            {
+                Console.Write(items[i]);
+
+                if (i != items.Count - 1)
+                {
+                    Console.Write(", ");
+                }
+            }
+            Console.WriteLine("]");
+        }
+
         public static void PrintList(IList<int[]> numArrs)
         {
             Console.WriteLine(" [");

@@ -39,8 +39,10 @@ namespace CodingPatterns
             InPlaceLinkedListReversal.RunTests();
             TwoHeaps.RunTests();
             Subsets.RunTests();
+            ModifiedBinarySearch.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
+
         }
     }
 }

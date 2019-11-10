@@ -61,9 +61,140 @@ namespace CodingPatterns.Patterns
             n = 4;
             Helpers.PrintList(FindBalancedParens(n));
 
+            name = "FindAllSubstrings";
+            Helpers.PrintStartFunctionTest(name);
+            //str = "abc";
+            //Helpers.PrintList(FindGeneralizedAbbreviations(str));
+            //str = "abcd";
+            //Helpers.PrintList(FindGeneralizedAbbreviations(str));
+            //str = "ab";
+            //Helpers.PrintList(FindGeneralizedAbbreviations(str));
+            str = "abcd";
+            Console.Write($"{str} => ");
+            Helpers.PrintList(FindAllSubstrings(str));
+
+            name = "FindGeneralizedAbbreviations";
+            Helpers.PrintStartFunctionTest(name);
+            str = "ab";
+            Console.Write($"{str} => ");
+            Helpers.PrintList(FindGeneralizedAbbreviations(str));
+            str = "BAT";
+            Console.Write($"{str} => ");
+            Helpers.PrintList(FindGeneralizedAbbreviations(str));
+            str = "code";
+            Console.Write($"{str} => ");
+            Helpers.PrintList(FindGeneralizedAbbreviations(str));
+
 
 
             Helpers.PrintEndTests(testPattern);
+        }
+
+        public static IList<string> FindGeneralizedAbbreviations(string word)
+        {
+            // start with empty string
+            // Loop:
+            //    On each string from previous loop:
+            //      1: Abbreviate current character with a fixed character used as counter '_', 
+            //          "_" -> 1; "__" -> 2; etc.
+            //      2: Add current character to output (skip abbreviation)
+
+            List<string> abbrStrs = new List<string>();
+
+            if (word == null)
+            {
+                return null;
+            }
+
+            abbrStrs.Add("");
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                List<string> temp = new List<string>();
+                int size = abbrStrs.Count;
+                
+                for (int j = 0; j < size; j++)
+                {
+                    // Abbreviate
+                    temp.Add(abbrStrs[j] + '_');                    
+
+                    // Add letter
+                    StringBuilder sb = new StringBuilder(abbrStrs[j]);
+                    // Convert any existing, consecutive '_' into their respective count
+                    int abbrIndex = sb.ToString().IndexOf('_');
+                    if (abbrIndex >= 0)
+                    {
+                        int count = 0;
+                        
+                        for (int k = abbrIndex; k < sb.Length && sb.ToString()[k] == '_'; k++, count++) ;
+
+                        sb.Remove(abbrIndex, count);
+                        sb.Insert(abbrIndex, count);
+                    }
+
+                    sb.Append(word[i]);
+                    temp.Add(sb.ToString());
+                }
+
+                abbrStrs = new List<string>(temp);
+            }
+
+            // Final conversion
+            for (int i = 0; i < abbrStrs.Count; i++)
+            {
+                int abbrIndex = abbrStrs[i].IndexOf('_');
+
+                if (abbrIndex >= 0)
+                {
+                    StringBuilder sb = new StringBuilder(abbrStrs[i]);
+                    int count = 0;
+
+                    for (int j = abbrIndex; j < sb.Length && sb.ToString()[j] == '_'; j++, count++) ;
+
+                    sb.Remove(abbrIndex, count);
+                    sb.Insert(abbrIndex, count);
+                    abbrStrs[i] = sb.ToString();
+                }
+            }
+
+            return abbrStrs;
+        }
+
+        public static IList<string> FindAllSubstrings(string word)
+        {
+            List<string> substrings = new List<string>();
+
+            if (String.IsNullOrEmpty(word))
+            {
+                return null;
+            }
+
+            // Add empty string
+            substrings.Add("");
+
+            // Add each individual letter
+            List<string> strs = new List<string>();
+            for (int i = 0; i < word.Length; i++)
+            {
+                strs.Add("" + word[i]);
+            }
+
+            substrings.AddRange(strs);
+
+            // Loop until done
+            for (int i = 0; i < word.Length - 1; i++)
+            {
+                string[] temp = new string[strs.Count - 1];
+                for (int j = 0, k = i + 1; j < strs.Count - 1 && k < word.Length; j++, k++)
+                {
+                    temp[j] = strs[j] + word[k];
+                }
+
+                substrings.AddRange(temp);
+                strs = new List<string>(temp);
+            }
+
+            return substrings;
         }
 
         public static IList<string> FindBalancedParens(int n)

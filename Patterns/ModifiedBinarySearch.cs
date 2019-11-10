@@ -4,10 +4,36 @@ using System.Text;
 
 namespace CodingPatterns.Patterns
 {
+    public class ArrayReader
+    {
+        private int[] _arr;
+
+        public ArrayReader(int[] arr)
+        {
+            this._arr = arr;
+        }
+
+        public int Get(int index)
+        {
+            if (index >= _arr.Length)
+            {
+                return int.MaxValue;
+            }
+
+            return _arr[index];
+        }
+
+        public int[] GetArray()
+        {
+            return _arr;
+        }
+    }
+
     class ModifiedBinarySearch
     {
         public static void RunTests()
         {
+            ArrayReader reader;
             int[] nums, range;
             int key;
             string name;
@@ -68,7 +94,130 @@ namespace CodingPatterns.Patterns
             range = FindRange(nums, key);
             Console.WriteLine($"-> [{range[0]},{range[1]}]");
 
+            name = "InfiniteArrayFindKey";
+            Helpers.PrintStartFunctionTest(name);
+            reader = new ArrayReader(new int[] { 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 });
+            key = 16;
+            Helpers.PrintArray(reader.GetArray());
+            Console.WriteLine(InfiniteArrayFindKey(reader, key));
+            key = 11;
+            Helpers.PrintArray(reader.GetArray());
+            Console.WriteLine(InfiniteArrayFindKey(reader, key));
+            reader = new ArrayReader(new int[] { 1, 3, 8, 10, 15 });
+            key = 15;
+            Helpers.PrintArray(reader.GetArray());
+            Console.WriteLine(InfiniteArrayFindKey(reader, key));
+            key = 200;
+            Helpers.PrintArray(reader.GetArray());
+            Console.WriteLine(InfiniteArrayFindKey(reader, key));
+
+            name = "FindMindDiffElement";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 4, 6, 10 };
+            key = 7;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMinDiffElement(nums, key));
+            nums = new int[] { 4, 6, 10 };
+            key = 4;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMinDiffElement(nums, key));
+            nums = new int[] { 1, 3, 8, 10, 15 };
+            key = 12;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMinDiffElement(nums, key));
+            nums = new int[] { 4, 6, 10 };
+            key = 17;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMinDiffElement(nums, key));
+
             Helpers.PrintEndTests(testPattern);
+        }
+
+        static int FindMinDiffElement(int[] nums, int key)
+        {
+            int start = 0, mid = 0, end = 0;
+
+            if (nums == null || nums.Length < 1 || nums[0] > key)
+            {
+                return -1;
+            }
+
+            if (nums[0] > key)
+            {
+                return nums[0];
+            }
+
+            if (nums[nums.Length - 1] < key)
+            {
+                return nums[nums.Length - 1];
+            }
+
+            end = nums.Length - 1;
+
+            while (start <= end)
+            {
+                mid = start + (end - start) / 2;
+
+                if (nums[mid] < key)
+                {
+                    start = mid + 1;
+                }
+                else if (nums[mid] > key)
+                {
+                    end = mid - 1;
+                }
+                else
+                {
+                    return nums[mid];
+                }
+            }
+
+            if (nums[start] - key < (key - nums[end]))
+            {
+                return nums[start];
+            }
+
+            return nums[end];
+        }
+
+        static int InfiniteArrayFindKey(ArrayReader reader, int key)
+        {
+            int start = 0, mid = 0, end = 1;
+
+            if (reader.Get(0) >= key)
+            {
+                if (reader.Get(0) == key)
+                {
+                    return 0;
+                }
+
+                return -1;
+            }
+
+            while (reader.Get(end) <= key && reader.Get(end) != int.MaxValue)
+            {
+                end *= 2;
+            }
+
+            while (start <= end)
+            {
+                mid = start + (end - start) / 2;
+
+                if (reader.Get(mid) > key)
+                {
+                    end = mid - 1;
+                }
+                else if(reader.Get(mid) < key)
+                {
+                    start = mid + 1;
+                }
+                else
+                {
+                    return mid;
+                }
+            }
+
+            return -1;
         }
 
         static int[] FindRange(int[] nums, int key)

@@ -507,30 +507,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\matto\\.nuget\\packages\\": {},
-    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/Matt/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matto\\source\\repos\\CodingPatterns\\CodingPatterns.csproj",
+      "projectUniqueName": "/Users/Matt/workspace/code/interview_practice/CodingPatterns/CodingPatterns.csproj",
       "projectName": "CodingPatterns",
-      "projectPath": "C:\\Users\\matto\\source\\repos\\CodingPatterns\\CodingPatterns.csproj",
-      "packagesPath": "C:\\Users\\matto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matto\\source\\repos\\CodingPatterns\\obj\\",
+      "projectPath": "/Users/Matt/workspace/code/interview_practice/CodingPatterns/CodingPatterns.csproj",
+      "packagesPath": "/Users/Matt/.nuget/packages/",
+      "outputPath": "/Users/Matt/workspace/code/interview_practice/CodingPatterns/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\matto\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/Matt/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -567,7 +565,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }

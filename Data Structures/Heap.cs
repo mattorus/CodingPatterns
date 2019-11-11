@@ -12,7 +12,13 @@ namespace CodingPatterns
 
         protected Comparison<T> _comparison;
 
-        public int Count { get { return _end; } }
+        public int Count 
+        { 
+            get 
+            { 
+                return _end; 
+            } 
+        }
 
         public Heap(Comparison<T> comparison = default, int size = 50)
         {
@@ -43,6 +49,51 @@ namespace CodingPatterns
             }
 
             return _heap[0];
+        }
+
+        protected T Parent(int index)
+        {
+            return _heap[GetParentIndex(index)];
+        }
+
+        protected T LeftChild(int index)
+        {
+            return _heap[GetLeftChildIndex(index)];
+        }
+
+        protected T RightChild(int index)
+        {
+            return _heap[GetRightChildIndex(index)];
+        }
+
+        protected int GetParentIndex(int index)
+        {
+            return (int)Math.Ceiling((index - 2) / 2d);
+        }
+
+        protected int GetLeftChildIndex(int index)
+        {
+            return (index * 2) + 1;
+        }
+
+        protected int GetRightChildIndex(int index)
+        {
+            return GetLeftChildIndex(index) + 1;
+        }
+
+        protected bool HasParent(int index)
+        {
+            return GetParentIndex(index) >= 0;
+        }
+
+        protected bool HasLeftChild(int index)
+        {
+            return GetLeftChildIndex(index) < _end;
+        }
+
+        protected bool HasRightChild(int index)
+        {
+            return GetRightChildIndex(index) < _end;
         }
 
         public void Add(T nums)

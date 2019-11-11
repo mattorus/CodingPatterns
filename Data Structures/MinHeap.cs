@@ -11,13 +11,11 @@ namespace CodingPatterns
         public override void HeapifyUp()
         {
             int index = _end;
-            int parent = (int)Math.Ceiling((index - 2) / 2d);
 
-            while (parent >= 0 && Compare(_heap[index], _heap[parent]) < 0)
+            while (HasParent(index) && Compare(_heap[index], Parent(index)) < 0)
             {
-                Helpers.Swap(_heap, index, parent);
-                index = parent;
-                parent = (int)Math.Ceiling((index - 2) / 2d);
+                Helpers.Swap(_heap, index, GetParentIndex(index));
+                index = GetParentIndex(index);
             }
         }
 
@@ -25,24 +23,23 @@ namespace CodingPatterns
         {
             int index = 0;
 
-            while (true)
+            while (HasLeftChild(index))
             {
-                int left = (index * 2) + 1;
-                int right = left + 1;
+                int smallerChildIndex = GetLeftChildIndex(index);
 
-                if (left <= _end && Compare(_heap[index], _heap[left]) > 0)
+                if (HasRightChild(index) && Compare(RightChild(index), LeftChild(index)) < 0)
                 {
-                    Helpers.Swap(_heap, index, left);
-                    index = left;
+                    smallerChildIndex = GetRightChildIndex(index);
                 }
-                else if (right <= _end && Compare(_heap[index], _heap[right]) > 0)
+
+                if (Compare(_heap[index], _heap[smallerChildIndex]) < 0)
                 {
-                    Helpers.Swap(_heap, index, right);
-                    index = right;
+                    break;
                 }
                 else
                 {
-                    break;
+                    Helpers.Swap(_heap, index, smallerChildIndex);
+                    index = smallerChildIndex;
                 }
             }
         }

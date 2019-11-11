@@ -40,6 +40,7 @@ namespace CodingPatterns
             TwoHeaps.RunTests();
             Subsets.RunTests();
             ModifiedBinarySearch.RunTests();
+            ElementsTopK.RunTests();
 
             Console.WriteLine("----------------------END PATTERN TESTS----------------------");
 

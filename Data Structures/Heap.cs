@@ -20,8 +20,12 @@ namespace CodingPatterns
             {
                 _comparison = default;
             }
+            else
+            {
+                _comparison = comparison;
 
-            _comparison = comparison;
+            }
+
             _heap = new T[(size < _minSize ? _minSize : size)];
             _end = 0;
         }
@@ -44,7 +48,7 @@ namespace CodingPatterns
         public void Add(T nums)
         {
             _heap[_end] = nums;
-            Heapify(_end);
+            HeapifyUp();
             _end++;
 
             if (_end == _heap.Length)
@@ -65,12 +69,13 @@ namespace CodingPatterns
             _end--;
             _heap[0] = _heap[_end];
             
-            Heapify(0);
+            HeapifyDown();
 
             return root;
         }
 
-        public abstract void Heapify(int index);
+        public abstract void HeapifyUp();
+        public abstract void HeapifyDown();
 
         private void Grow()
         {

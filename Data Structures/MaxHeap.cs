@@ -8,26 +8,42 @@ namespace CodingPatterns
     {
         public MaxHeap(Comparison<T> comparison = default, int size = 50) : base(comparison, size) { }
 
-        public override void Heapify(int index)
+        public override void HeapifyUp()
         {
+            int index = _end;
             int parent = (int)Math.Ceiling((index - 2) / 2d);
-            int left = (index * 2) + 1;
-            int right = left + 1;
 
-            if (parent >= 0 && Compare(_heap[index], _heap[parent]) > 0)
+            while (parent >= 0 && Compare(_heap[index], _heap[parent]) > 0)
             {
                 Helpers.Swap(_heap, index, parent);
-                Heapify(parent);
+                index = parent;
+                parent = (int)Math.Ceiling((index - 2) / 2d);
             }
-            else if (left < _end && Compare(_heap[index], _heap[left]) < 0)
+        }
+
+        public override void HeapifyDown()
+        {
+            int index = 0;
+
+            while (true)
             {
-                Helpers.Swap(_heap, index, left);
-                Heapify(left);
-            }
-            else if (right < _end && Compare(_heap[index], _heap[right]) < 0)
-            {
-                Helpers.Swap(_heap, index, right);
-                Heapify(right);
+                int left = (index * 2) + 1;
+                int right = left + 1;
+
+                if (left <= _end && Compare(_heap[index], _heap[left]) < 0)
+                {
+                    Helpers.Swap(_heap, index, left);
+                    index = left;
+                }
+                else if (right <= _end && Compare(_heap[index], _heap[right]) < 0)
+                {
+                    Helpers.Swap(_heap, index, right);
+                    index = right;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 

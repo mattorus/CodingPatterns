@@ -130,14 +130,58 @@ namespace CodingPatterns.Patterns
             Helpers.PrintArray(nums);
             Console.WriteLine(FindMinDiffElement(nums, key));
 
+            name = "FindMaxBitonicArray";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 1, 3, 8, 12, 4, 2 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMaxBitonicArray(nums));
+            nums = new int[] { 3, 8, 3, 1 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMaxBitonicArray(nums));
+            nums = new int[] { 1, 3, 8, 12 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMaxBitonicArray(nums));
+            nums = new int[] { 10, 9, 8 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(FindMaxBitonicArray(nums));
+
             Helpers.PrintEndTests(testPattern);
+        }
+
+        static int FindMaxBitonicArray(int[] nums)
+        {
+            int start = 0, mid = 0, end = 0, key = 0;
+
+            if (nums == null || nums.Length < 1)
+            {
+                return -1;
+            }
+
+            end = nums.Length - 1;
+            key = nums[0];
+
+            while (start < end)
+            {
+                mid = start + (end - start) / 2;
+
+                if (nums[mid] > nums[mid + 1])
+                {
+                    end = mid;
+                }
+                else
+                {
+                    start = mid + 1;
+                }
+            }
+
+            return nums[start];
         }
 
         static int FindMinDiffElement(int[] nums, int key)
         {
             int start = 0, mid = 0, end = 0;
 
-            if (nums == null || nums.Length < 1 || nums[0] > key)
+            if (nums == null || nums.Length < 1)
             {
                 return -1;
             }

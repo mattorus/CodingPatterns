@@ -58,9 +58,6 @@ artifacts/
 StyleCopReport.xml
 
 # Files built by Visual Studio
-obj/CodingPatterns.csproj.nuget.dgspec.json
-obj/CodingPatterns.csproj.nuget.g.props
-obj/project.assets.json
 *_i.c
 *_p.c
 *_i.h
@@ -191,6 +188,10 @@ PublishScripts/
 # NuGet v3's project.json files produces more ignorable files
 *.nuget.props
 *.nuget.targets
+
+./obj/CodingPatterns.csproj.nuget.dgspec.json
+./obj/CodingPatterns.csproj.nuget.g.props
+./obj/project.assets.json
 
 # Microsoft Azure Build Output
 csx/

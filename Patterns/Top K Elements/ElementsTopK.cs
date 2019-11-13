@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CodingPatterns.Patterns
+namespace CodingPatterns.Patterns.TopKElements
 {
     public class ElementsTopK
     {
@@ -76,12 +76,12 @@ namespace CodingPatterns.Patterns
             Helpers.PrintStartFunctionTest(name);
             points = new Point[] { new Point(1, 2), new Point(1, 3) };
             k = 1;
-            Helpers.PrintList<Point>(ClosestKPointsToOrigin(points, k));
+            Helpers.PrintList(ClosestKPointsToOrigin(points, k));
             points = new Point[] { new Point(1, 3), new Point(3, 4), new Point(2, -1) };
             k = 2;
-            Helpers.PrintList<Point>(ClosestKPointsToOrigin(points, k));
+            Helpers.PrintList(ClosestKPointsToOrigin(points, k));
             k = 1;
-            Helpers.PrintList<Point>(ClosestKPointsToOrigin(points, k));
+            Helpers.PrintList(ClosestKPointsToOrigin(points, k));
 
             name = "ConnectRopes";
             Helpers.PrintStartFunctionTest(name);
@@ -109,6 +109,14 @@ namespace CodingPatterns.Patterns
             Helpers.PrintArray(nums);
             Helpers.PrintList(TopKFrequentNumbers(nums, k));
 
+            name = "KthLargestNumberInStream.Add";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 3, 1, 5, 12, 2, 11 };
+            k = 4;
+            KthLargestNumberInStream kthLargestNumber = new KthLargestNumberInStream(nums, k);
+            Console.WriteLine(kthLargestNumber.Add(6));
+            Console.WriteLine(kthLargestNumber.Add(13));
+            Console.WriteLine(kthLargestNumber.Add(4));
 
         }
 
@@ -215,7 +223,7 @@ namespace CodingPatterns.Patterns
 
             Console.WriteLine($"heap: {heap}");
 
-            while (heap.Count > 0) 
+            while (heap.Count > 0)
             {
                 closestPoints.Add(heap.Remove());
             }
@@ -245,8 +253,8 @@ namespace CodingPatterns.Patterns
                     heap.Add(nums[i]);
                 }
             }
-                        
-            return heap.Peek();            
+
+            return heap.Peek();
         }
 
         static List<int> LargestNumbersK(int[] nums, int k)

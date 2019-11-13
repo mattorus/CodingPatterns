@@ -20,20 +20,35 @@ namespace CodingPatterns
             } 
         }
 
-        public Heap(Comparison<T> comparison = default, int size = 50)
+        public Heap(Comparison<T> comparison, int size = 50)
         {
             if (comparison == null)
             {
-                _comparison = default;
-            }
-            else
-            {
-                _comparison = comparison;
-
+                throw new NullReferenceException("Comparison cannot be null.");
             }
 
+            _comparison = comparison;
             _heap = new T[(size < _minSize ? _minSize : size)];
             _end = 0;
+        }
+
+        public Heap(Comparison<T> comparison, T[] arr)
+            : this(comparison, (arr != null ? arr.Length : _minSize))
+        {
+            InitHeap(arr);
+        }
+
+        private void InitHeap(T[] arr)
+        {
+            if (arr == null)
+            {
+                throw new NullReferenceException("Given array cannot be null.");
+            }
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Add(arr[i]);
+            }
         }
 
         public int Compare(T x, T y)
@@ -181,7 +196,7 @@ namespace CodingPatterns
                     str = String.Join(",", _heap[i]);
                 }
 
-                stringBuilder.Append($"[{str}]");
+                stringBuilder.Append($"{str}");
 
                 if (i != _end - 1)
                 {

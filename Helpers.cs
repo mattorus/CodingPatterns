@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodingPatterns.DataStructures;
+using System;
 using System.Collections.Generic;
 
 namespace CodingPatterns

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace CodingPatterns
+namespace CodingPatterns.DataStructures
 {
     abstract class Heap<T>: IComparer<T>
     {
@@ -142,6 +143,11 @@ namespace CodingPatterns
 
         public abstract void HeapifyUp();
         public abstract void HeapifyDown();
+
+        public List<T> ToList()
+        {
+            return _heap.Take(Count).ToList();
+        }
 
         private void Grow()
         {

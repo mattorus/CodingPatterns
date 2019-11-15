@@ -1,6 +1,7 @@
-﻿using CodingPatterns.Data_Structures;
+﻿using CodingPatterns.DataStructures;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingPatterns.Patterns.TopKElements
 {
@@ -11,7 +12,7 @@ namespace CodingPatterns.Patterns.TopKElements
             Point[] points;
             int[] nums;
             List<int> retVal;
-            int k;
+            int k, x;
             string name;
             string testPattern = "ELEMENTSTOPK";
             Helpers.PrintStartTests(testPattern);
@@ -118,6 +119,82 @@ namespace CodingPatterns.Patterns.TopKElements
             Console.WriteLine(kthLargestNumber.Add(13));
             Console.WriteLine(kthLargestNumber.Add(4));
 
+            name = "FindKClosestNumbers";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 5, 6, 7, 8, 9 };
+            x = 7;
+            k = 3;
+            Helpers.PrintArray(nums);
+            Helpers.PrintList(FindKClosestNumbers(nums, x, k));
+            nums = new int[] { 2, 4, 5, 6, 9 };
+            x = 6;
+            k = 3;
+            Helpers.PrintArray(nums);
+            Helpers.PrintList(FindKClosestNumbers(nums, x, k));
+            nums = new int[] { 2, 4, 5, 6, 9 };
+            x = 10;
+            k = 3;
+            Helpers.PrintArray(nums);
+            Helpers.PrintList(FindKClosestNumbers(nums, x, k));
+            nums = new int[] { 2, 44 };
+            x = 10;
+            k = 3;
+            Helpers.PrintArray(nums);
+            Helpers.PrintList(FindKClosestNumbers(nums, x, k));
+
+        }
+
+        static List<int> FindKClosestNumbers(int[] nums, int x, int k)
+        {
+            MinHeap<(int diff, int num)> heap = new MinHeap<(int diff, int num)>((a, b) => a.diff.CompareTo(b.diff));
+            List<int> list = new List<int>();
+            int xIndex = BinarySearch(nums, x);
+            int left = Math.Max(xIndex - k, 0);
+            int right = Math.Min(xIndex + k, nums.Length - 1);
+            
+            for (int i = left; i <= right; i++)
+            {
+                heap.Add((Math.Abs(nums[i] - x), nums[i]));
+            }
+
+            for (int i = 0; i < k && heap.Count > 0; i++)
+            {
+                list.Add(heap.Remove().num);
+            }
+
+            list.Sort();
+
+            return list;
+        }
+
+        static int BinarySearch(int[] nums, int x)
+        {
+            int start = 0, mid = 0, end = 1;
+
+            if (nums == null || nums.Length < 1)
+            {
+                throw new ArgumentException("Array cannot be null or empty.");
+            }
+
+            while (start < end)
+            {
+                mid = start + (end - start) / 2;
+
+                if (nums[mid] > x)
+                {
+                    end = mid - 1;
+                }
+                else if (nums[mid] < x)
+                {
+                    start = mid + 1;
+                }
+                else
+                {
+                    return mid;
+                }
+            }
+
+            return start;
         }
 
         static List<int> TopKFrequentNumbers(int[] nums, int k)

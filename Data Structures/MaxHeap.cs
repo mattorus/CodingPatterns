@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CodingPatterns
+namespace CodingPatterns.DataStructures
 {
     class MaxHeap<T> : Heap<T>
     {

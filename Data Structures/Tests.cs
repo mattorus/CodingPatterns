@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CodingPatterns.Data_Structures
+namespace CodingPatterns.DataStructures
 {
     static class HeapTest
     {

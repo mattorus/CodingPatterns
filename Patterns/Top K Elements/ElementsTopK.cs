@@ -12,7 +12,7 @@ namespace CodingPatterns.Patterns.TopKElements
             Point[] points;
             int[] nums;
             List<int> retVal;
-            int k, x;
+            int k, k1, k2, x;
             string name;
             string testPattern = "ELEMENTSTOPK";
             Helpers.PrintStartTests(testPattern);
@@ -142,6 +142,117 @@ namespace CodingPatterns.Patterns.TopKElements
             Helpers.PrintArray(nums);
             Helpers.PrintList(FindKClosestNumbers(nums, x, k));
 
+            name = "MaxDistinctElements";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 7, 3, 5, 8, 5, 3, 3 };
+            k = 2;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(MaxDistinctElements(nums, k));
+            nums = new int[] { 3, 5, 12, 11, 12 };
+            k = 3;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(MaxDistinctElements(nums, k));
+            nums = new int[] { 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5 };
+            k = 2;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(MaxDistinctElements(nums, k));
+
+            name = "SumOfElements";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 1, 3, 12, 5, 15, 11 };
+            k1 = 3;
+            k2 = 6;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(SumOfElements(nums, k1, k2));
+            nums = new int[] { 3, 5, 8, 7 };
+            k1 = 1;
+            k2 = 4;
+            Helpers.PrintArray(nums);
+            Console.WriteLine(SumOfElements(nums, k1, k2));
+
+        }
+
+
+        static int SumOfElements(int[] nums, int k1, int k2)
+        {
+            MinHeap<int> heap = new MinHeap<int>(Constants.CompareInt);
+            int sum = 0;
+
+            if (nums == null)
+            {
+                return 0;
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                heap.Add(nums[i]);
+            }
+
+            for (int i = 0; i < k1; i++)
+            {
+                heap.Remove();
+            }
+
+            for (int i = k1; i < k2 - 1; i++)
+            {
+                sum += heap.Remove();
+            }
+
+            return sum;
+        }
+
+        static int MaxDistinctElements(int[] nums, int k)
+        {
+            Dictionary<int, int> numCounts = new Dictionary<int, int>();
+            MinHeap<(int num, int numCount)> heap = new MinHeap<(int num, int numCount)>((a, b) => a.numCount.CompareTo(b.numCount));
+            int numDistinct = 0;
+
+            if (nums == null)
+            {
+                return 0;
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!numCounts.ContainsKey(nums[i]))
+                {
+                    numCounts[nums[i]] = 0;
+                }
+
+                numCounts[nums[i]]++;
+            }
+
+            foreach((int num, int numCount) in numCounts)
+            {
+
+                if (numCount == 1)
+                {
+                    numDistinct++;
+                }
+                else
+                {
+                    
+                    heap.Add((num, numCount));
+                }
+            }
+
+            while (k > 0 && heap.Count > 0)
+            {
+                var (num, numCount) = heap.Remove();
+                k -= numCount - 1;
+
+                if (k >= 0)
+                {
+                    numDistinct++;
+                }
+            }
+
+            if (k > 0)
+            {
+                numDistinct -= k;
+            }
+
+            return numDistinct;
         }
 
         static List<int> FindKClosestNumbers(int[] nums, int x, int k)

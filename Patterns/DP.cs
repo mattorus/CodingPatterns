@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CodingPatterns.Patterns
 {
@@ -8,12 +7,12 @@ namespace CodingPatterns.Patterns
     {
         public static void RunTests()
         {
-            int[] weights, profits;
+            int[] nums, weights, profits;
             int n, capacity;
             string name;
-            string testPattern = "DP";
-            DateTime start, end;
-            TimeSpan runTime;
+            string testPattern;
+
+            testPattern = "DP";
             Helpers.PrintStartTests(testPattern);
 
             name = "FibonacciDP";
@@ -43,8 +42,8 @@ namespace CodingPatterns.Patterns
             Console.WriteLine($"capacity: {capacity}");
             Console.WriteLine($"maxProfit_brute_iter:  {MaxProfitWeighted_Brute(weights, profits, capacity)}");
             Console.WriteLine($"maxProfit_brute_recur: {MaxProfitWeighted_BruteRecursive(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_memo:     {MaxProfitWeighted_DP_Memo(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_bottomup: {MaxProfitWeighted_DP_BottomUp(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_topDown:     {MaxProfitWeighted_TopDown(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_bottomUp:    {MaxProfitWeighted_BottomUp(weights, profits, capacity)}");
             capacity = 6;
             Console.Write($"weights: ");
             Helpers.PrintArray(weights);
@@ -53,8 +52,8 @@ namespace CodingPatterns.Patterns
             Console.WriteLine($"capacity: {capacity}");
             Console.WriteLine($"maxProfit_brute_iter:  {MaxProfitWeighted_Brute(weights, profits, capacity)}");
             Console.WriteLine($"maxProfit_brute_recur: {MaxProfitWeighted_BruteRecursive(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_memo:     {MaxProfitWeighted_DP_Memo(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_bottomup: {MaxProfitWeighted_DP_BottomUp(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_topDown:     {MaxProfitWeighted_TopDown(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_bottomUp:    {MaxProfitWeighted_BottomUp(weights, profits, capacity)}");
             weights = new int[] { 2, 3, 1, 4 };
             profits = new int[] { 4, 5, 1, 7 };
             capacity = 6;
@@ -65,8 +64,8 @@ namespace CodingPatterns.Patterns
             Console.WriteLine($"capacity: {capacity}");
             Console.WriteLine($"maxProfit_brute_iter:  {MaxProfitWeighted_Brute(weights, profits, capacity)}");
             Console.WriteLine($"maxProfit_brute_recur: {MaxProfitWeighted_BruteRecursive(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_memo:     {MaxProfitWeighted_DP_Memo(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_bottomup: {MaxProfitWeighted_DP_BottomUp(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_topDown:     {MaxProfitWeighted_TopDown(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_bottomUp:    {MaxProfitWeighted_BottomUp(weights, profits, capacity)}");
             weights = new int[] { 2, 3, 1, 4 };
             profits = new int[] { 4, 5, 2, 7 };
             capacity = 6;
@@ -77,17 +76,169 @@ namespace CodingPatterns.Patterns
             Console.WriteLine($"capacity: {capacity}");
             Console.WriteLine($"maxProfit_brute_iter:  {MaxProfitWeighted_Brute(weights, profits, capacity)}");
             Console.WriteLine($"maxProfit_brute_recur: {MaxProfitWeighted_BruteRecursive(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_memo:     {MaxProfitWeighted_DP_Memo(weights, profits, capacity)}");
-            Console.WriteLine($"maxProfit_DP_bottomup: {MaxProfitWeighted_DP_BottomUp(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_topDown:     {MaxProfitWeighted_TopDown(weights, profits, capacity)}");
+            Console.WriteLine($"maxProfit_bottomUp:    {MaxProfitWeighted_BottomUp(weights, profits, capacity)}");
+
+            name = "HasEqualSubsetSumPartition";
+            Helpers.PrintStartFunctionTest(name);
+            nums = new int[] { 1, 2, 3, 4 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(HasEqualSubsetSumPartition_Iter(nums));
+            Console.WriteLine(HasEqualSubsetSumPartition_DP_Recur(nums));
+            nums = new int[] { 1, 1, 3, 4, 7 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(HasEqualSubsetSumPartition_Iter(nums));
+            Console.WriteLine(HasEqualSubsetSumPartition_DP_Recur(nums));
+            nums = new int[] { 2, 3, 4, 6 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(HasEqualSubsetSumPartition_Iter(nums));
+            Console.WriteLine(HasEqualSubsetSumPartition_DP_Recur(nums));
+            nums = new int[] { 1, 2, 5, 6 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(HasEqualSubsetSumPartition_Iter(nums));
+            Console.WriteLine(HasEqualSubsetSumPartition_DP_Recur(nums));
+            nums = new int[] { 1, 2, 3, 4, 5 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(HasEqualSubsetSumPartition_Iter(nums));
+            Console.WriteLine(HasEqualSubsetSumPartition_DP_Recur(nums));
+            nums = new int[] { 1, 2, 3, 4, 5, 6 };
+            Helpers.PrintArray(nums);
+            Console.WriteLine(HasEqualSubsetSumPartition_Iter(nums));
+            Console.WriteLine(HasEqualSubsetSumPartition_DP_Recur(nums));
 
 
             Helpers.PrintEndTests(testPattern);
 
         }
 
+        public static bool HasEqualSubsetSumPartition_DP_Recur(int[] nums)
+        {
+            int sum = 0;
+            bool?[][] dp;
+
+            if (nums == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                sum += nums[i];
+            }
+
+            if (sum % 2 != 0)
+            {
+                return false;
+            }
+
+            dp = new bool?[nums.Length][];
+            for (int i = 0; i < dp.Length; i++)
+            {
+                dp[i] = new bool?[sum / 2 + 1];
+            }
+
+            return HasEqualSubsetSumPartition_Recur(dp, nums, sum / 2, 0);
+        }
+
+        static bool HasEqualSubsetSumPartition_Recur(bool?[][] dp, int[] nums, int sum, int curIndex)
+        {
+            if (sum == 0)
+            {
+                return true;
+            }
+
+            if (nums.Length == 0 || curIndex >= nums.Length)
+            {
+                return false;
+            }
+
+            if (dp[curIndex][sum] == null)
+            {
+                if (nums[curIndex] <= sum && HasEqualSubsetSumPartition_Recur(dp, nums, sum - nums[curIndex], curIndex + 1))
+                {
+                    dp[curIndex][sum] = true;
+
+                    return true;
+                }                
+
+                dp[curIndex][sum] = HasEqualSubsetSumPartition_Recur(dp, nums, sum, curIndex + 1);
+            }
+
+            return (bool) dp[curIndex][sum];
+        }
+
+        public static bool HasEqualSubsetSumPartition_Iter(int[] nums)
+        {
+            IList<IList<int>> subsets = new List<IList<int>>();
+            Dictionary<string, int[]> dp = new Dictionary<string, int[]>();
+
+            if (nums == null)
+            {
+                return false;
+            }
+
+            subsets.Add(new List<int>());
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int size = subsets.Count;
+
+                for (int j = 0; j < size; j++)
+                {
+                    List<int> setA = new List<int>(subsets[j]) { i };
+                    List<int> setB = new List<int>();
+                    int sumA = 0, sumB = 0;
+
+                    setA.Sort();
+                    string keyA = String.Join(",", setA);
+
+                    if (!dp.ContainsKey(keyA))
+                    {
+                        for (int k = 0; k < setA.Count; k++)
+                        {
+                            sumA += nums[setA[k]];
+                        }
+
+                        for (int k = 0; k < nums.Length; k++)
+                        {
+                            if (!setA.Contains(k))
+                            {
+                                setB.Add(k);
+                                sumB += nums[k];
+                            }
+                        }
+
+                        if (sumA == sumB)
+                        {
+                            //Console.WriteLine($"Equal Subset Sum Partition found!");
+                            //Console.Write($"SetA: ");
+                            //Helpers.PrintList(setA);
+                            //Console.Write($"SetB: ");
+                            //Helpers.PrintList(setB);
+
+                            return true;
+                        }
+
+                        dp.Add(keyA, new int[] { sumA, sumB });
+                        setB.Sort();
+                        var keyB = String.Join(",", setB);
+                        dp.Add(keyB, new int[] { sumA, sumB });
+
+                        subsets.Add(setA);
+                    }
+                    //else
+                    //{
+                    //    Console.WriteLine($"Skipping already checked partition {keyA}...");
+                    //}
+                }
+            }
+
+            return false;
+        }
+                
         static Dictionary<(int capacity, int index), int> _history;
 
-        public static int MaxProfitWeighted_DP_BottomUp(int[] weights, int[] profits, int capacity)
+        public static int MaxProfitWeighted_BottomUp(int[] weights, int[] profits, int capacity)
         {
             // Create a 2d grid with index x...weights.Length - 1 and y...capacity
             int[][] dp;
@@ -129,12 +280,12 @@ namespace CodingPatterns.Patterns
                 }
             }
 
-            MaxProfitWeighted_DP_BottomUp_Print(weights, profits, capacity, dp);
+            //MaxProfitWeighted_DP_BottomUp_Print(weights, profits, capacity, dp);
 
             return dp[weights.Length - 1][capacity];
         }
 
-        static void MaxProfitWeighted_DP_BottomUp_Print(int[] weights, int[] profits, int capacity, int[][] dp)
+        static void MaxProfitWeighted_BottomUp_Print(int[] weights, int[] profits, int capacity, int[][] dp)
         {
             int totalProfit = dp[weights.Length - 1][capacity];
             Console.Write($"Selected item(s):");
@@ -156,38 +307,38 @@ namespace CodingPatterns.Patterns
             Console.WriteLine();
         }
 
-        public static int MaxProfitWeighted_DP_Memo(int[] weights, int[] profits, int capacity)
+        public static int MaxProfitWeighted_TopDown(int[] weights, int[] profits, int capacity)
         {
             _history = new Dictionary<(int capacity, int index), int>();
 
-            return MaxProfitWeighted_DP_Memo(weights, profits, capacity, 0);
+            return MaxProfitWeighted_TopDown(weights, profits, capacity, 0);
         }
 
-        static int MaxProfitWeighted_DP_Memo(int[] weights, int[] profits, int capacity, int index)
+        static int MaxProfitWeighted_TopDown(int[] weights, int[] profits, int capacity, int curIndex)
         {
             int profitA = 0, profitB = 0;
 
-            if (_history.ContainsKey((capacity, index)))
+            if (_history.ContainsKey((capacity, curIndex)))
             {
-                return _history[(capacity, index)];
+                return _history[(capacity, curIndex)];
             }
 
-            if (capacity <= 0 || index >= profits.Length)
+            if (capacity <= 0 || curIndex >= profits.Length)
             {
                 return 0;
             }
 
-            if (weights[index] <= capacity)
+            if (weights[curIndex] <= capacity)
             {
-                profitA = profits[index] +
-                    MaxProfitWeighted_DP_Memo(weights, profits, capacity - weights[index], index + 1);
+                profitA = profits[curIndex] +
+                    MaxProfitWeighted_TopDown(weights, profits, capacity - weights[curIndex], curIndex + 1);
             }
 
-            profitB = MaxProfitWeighted_DP_Memo(weights, profits, capacity, index + 1);
+            profitB = MaxProfitWeighted_TopDown(weights, profits, capacity, curIndex + 1);
 
-            _history.Add((capacity, index), Math.Max(profitA, profitB));
+            _history.Add((capacity, curIndex), Math.Max(profitA, profitB));
 
-            return _history[(capacity, index)];
+            return _history[(capacity, curIndex)];
         }
 
         public static int MaxProfitWeighted_BruteRecursive(int[] weights, int[] profits, int capacity)
@@ -197,7 +348,7 @@ namespace CodingPatterns.Patterns
             return MaxProfitWeighted_BruteRecursive(weights, profits, capacity, 0);
         }
 
-        static int MaxProfitWeighted_BruteRecursive(int[] weights, int[] profits, int capacity, int index)
+        static int MaxProfitWeighted_BruteRecursive(int[] weights, int[] profits, int capacity, int curIndex)
         {
             int profitA = 0, profitB = 0;
 
@@ -206,20 +357,20 @@ namespace CodingPatterns.Patterns
             //    Console.WriteLine($"Found previous call: ({capacity}, {index})...");
             //}
 
-            _history.TryAdd((capacity, index), 0);
+            _history.TryAdd((capacity, curIndex), 0);
 
-            if (capacity <= 0 || index >= profits.Length)
+            if (capacity <= 0 || curIndex >= profits.Length)
             {
                 return 0;
             }
 
-            if (weights[index] <= capacity)
+            if (weights[curIndex] <= capacity)
             {
-                profitA = profits[index] + 
-                    MaxProfitWeighted_BruteRecursive(weights, profits, capacity - weights[index], index + 1);
+                profitA = profits[curIndex] + 
+                    MaxProfitWeighted_BruteRecursive(weights, profits, capacity - weights[curIndex], curIndex + 1);
             }
 
-            profitB = MaxProfitWeighted_BruteRecursive(weights, profits, capacity, index + 1);
+            profitB = MaxProfitWeighted_BruteRecursive(weights, profits, capacity, curIndex + 1);
 
             return Math.Max(profitA, profitB);
         }

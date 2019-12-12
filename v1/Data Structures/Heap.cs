@@ -157,6 +157,8 @@ namespace CodingPatterns.DataStructures
             _heap = tempHeap;
         }
 
+        // Inspired by: http:// www.vcskicks .com/array -to-string .php
+        //              NOTE: Hyperlink disabled due to unsecure link
         protected string GetString(T item, string delimiter)
         {
             StringBuilder stringBuilder = new StringBuilder();

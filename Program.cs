@@ -8,7 +8,7 @@ namespace CodingPatterns
 {
     class Program
     {
-        static void Main(string[] args)
+        static void OldMain(string[] args)
         {
             Console.WriteLine("----------------------START HEAP TESTS----------------------");
 

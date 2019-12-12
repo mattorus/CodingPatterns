@@ -103,6 +103,25 @@ namespace CodingPatterns.Patterns
             Helpers.PrintEndTests(testPattern);
         }
 
+        public static bool HasPathSum(TreeNode root, int sum)
+        {
+            // DFS to check each node
+            // At each node, subtract node value from sum
+            // If leaf node && sum - node value == 0, return true
+
+            if (root == null)
+            {
+                return sum == 0;
+            }
+
+            if (root.Left == null && root.Right == null)
+            {
+                return root.Val == sum;
+            }
+
+            return HasPathSum(root.Left, sum - root.Val) || HasPathSum(root.Right, sum - root.Val);
+        }
+
         public static (int MaxPath, int MaxDepth) TreeDiameter(TreeNode root)
         {
             if (root == null)
@@ -125,26 +144,6 @@ namespace CodingPatterns.Patterns
             return (Math.Max(maxPath, maxChildPath), maxDepth);
         }
         // TreeDFS
-        // Take 2
-        public static bool HasPathSum(TreeNode root, int sum)
-        {
-            // DFS to check each node
-            // At each node, subtract node value from sum
-            // If leaf node && sum - node value == 0, return true
-
-            if (root == null)
-            {
-                return sum == 0;
-            }
-
-            if (root.Left == null && root.Right == null)
-            {
-                return root.Val == sum;
-            }
-
-            return HasPathSum(root.Left, sum - root.Val) || HasPathSum(root.Right, sum - root.Val);
-        }
-
         public static int PathsForSumIter(TreeNode root, int sum)
         {
             return PathsForSumIter(new Stack<TreeNode>(), root, sum);
